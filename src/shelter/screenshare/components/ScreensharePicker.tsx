@@ -18,7 +18,10 @@ const {
     plugin: { store },
 } = shelter;
 
-export const ScreensharePicker = (props: { close: () => void; sources: IPCSources[] }) => {
+export const ScreensharePicker = (props: {
+    close: () => void;
+    sources: IPCSources[];
+}) => {
     const [source, setSource] = createSignal("none");
     const [name, setName] = createSignal("nothing...");
     const [audio, setAudio] = createSignal(false);
@@ -46,6 +49,7 @@ export const ScreensharePicker = (props: { close: () => void; sources: IPCSource
                     <For each={props.sources}>
                         {(source: IPCSources) => (
                             <SourceCard
+                                selected_name={name}
                                 source={source}
                                 onSelect={(srcId, name) => {
                                     setSource(srcId);
