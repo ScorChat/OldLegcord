@@ -2,13 +2,10 @@ import { type Streams, desktopCapturer, ipcMain, session } from "electron";
 import { getConfig } from "../common/config.js";
 import { mainWindows } from "./window.js";
 
-let isDone: boolean;
-
 export function registerCustomHandler(): void {
     session.defaultSession.setDisplayMediaRequestHandler(
         async (request, callback) => {
             console.log(request);
-            isDone = false;
             const sources = await desktopCapturer
                 .getSources({
                     types: ["window", "screen"],
@@ -21,7 +18,6 @@ export function registerCustomHandler(): void {
                 if (sources[0] === undefined) return callback({});
             }
             ipcMain.once("startScreenshare", (_event, id: string, name: string, audio: boolean) => {
-                isDone = true;
                 console.log(`ID: ${id}`);
                 if (id === "none") {
                     try {

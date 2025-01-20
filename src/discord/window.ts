@@ -12,7 +12,6 @@ import {
     type MessageBoxOptions,
     app,
     dialog,
-    ipcMain,
     nativeImage,
     shell,
 } from "electron";

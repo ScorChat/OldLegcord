@@ -1,6 +1,6 @@
 import "./bridge.js";
 import "./mods/shelter.js";
-import "./mods/vencord.js"; // executing vencord earlier seems to fix a problem with a svelt js script that discord hosts, that deletes window.localStorage, causing VencordWeb.js to crash and throw "reading undefined" on localStorage.getItem
+import "./mods/vencord.js";
 import "./mods/equicord.js";
 import "./mods/custom.js";
 import "./optimizer.js";

@@ -24,6 +24,7 @@ export default defineConfig([
             ...electronExternals,
             "electron",
             "electron-is-dev",
+            "electron-updater",
             "electron-context-menu",
             "arrpc",
             "stream",
