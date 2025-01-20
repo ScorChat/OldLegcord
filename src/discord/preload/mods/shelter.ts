@@ -8,15 +8,18 @@ const requiredPlugins: Record<string, [string, { isVisible: boolean; allowedActi
     "legcord-screenshare": ["legcord://plugins/screenshare/", { isVisible: false, allowedActions: {} }],
     "legcord-touchbar": ["legcord://plugins/touchbar/", { isVisible: true, allowedActions: { toggle: true } }],
 };
-try {
-    await ipcRenderer.invoke("getShelterBundle").then(async (bundle: ModBundle) => {
-        if (bundle.enabled) {
-            await webFrame.executeJavaScript(`(()=>{
-                const SHELTER_INJECTOR_PLUGINS = ${JSON.stringify(requiredPlugins)};
-                ${bundle.js}
-            })()`);
-        }
-    });
-} catch (e) {
-    console.error(e);
+async function inject() {
+    try {
+        await ipcRenderer.invoke("getShelterBundle").then(async (bundle: ModBundle) => {
+            if (bundle.enabled) {
+                await webFrame.executeJavaScript(`(()=>{
+                    const SHELTER_INJECTOR_PLUGINS = ${JSON.stringify(requiredPlugins)};
+                    ${bundle.js}
+                })()`);
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
 }
+inject();
