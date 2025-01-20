@@ -29,6 +29,7 @@ const defaults: Settings = {
     mobileMode: false,
     tray: "dynamic",
     doneSetup: false,
+    popoutPiP: false,
     disableTitlebarChecks: false,
     bitrateMin: 500000,
     bitrateMax: 8000000,

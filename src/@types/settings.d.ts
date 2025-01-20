@@ -45,6 +45,7 @@ export interface Settings {
     tray: ValidTrayIcons;
     doneSetup: boolean;
     smoothScroll: boolean;
+    popoutPiP: boolean;
     autoScroll: boolean;
     additionalArguments: string;
     modCache?: Record<ValidMods, string>;
