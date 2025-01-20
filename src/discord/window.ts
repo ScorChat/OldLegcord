@@ -164,6 +164,8 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         return { action: "deny" };
     });
 
+    passedWindow.webContents.session.setSpellCheckerLanguages(getConfig("spellcheckLanguage"));
+
     registerCustomHandler();
 
     passedWindow.webContents.session.webRequest.onBeforeRequest(
