@@ -1,6 +1,7 @@
 import { addScript, addStyle, injectJS } from "../../common/dom.js";
 import { sleep } from "../../common/sleep.js";
 const { ipcRenderer } = require("electron");
+const version = ipcRenderer.sendSync("displayVersion") as string
 async function load() {
     await sleep(5000).then(() => {
         // dirty hack to make clicking notifications focus Legcord
@@ -43,5 +44,16 @@ async function load() {
         injectJS("legcord://assets/js/rpc.js");
         addStyle("legcord://assets/css/discord.css");
     });
+    // Settings info version injection
+    setInterval(() => {
+        const host = document.querySelector('[class*="sidebar"] [class*="info"]');
+        if (!host || host.querySelector("#ac-ver")) {
+            return;
+        }
+        const el = host.firstElementChild!.cloneNode() as HTMLSpanElement;
+        el.id = "ac-ver";
+        el.textContent = `Legcord Version: ${version}`;
+        host.append(el);
+    }, 1000);
 }
 load();

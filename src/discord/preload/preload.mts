@@ -6,8 +6,9 @@ import "./mods/equicord.mjs";
 import "./mods/custom.mjs";
 import "./patches.mjs";
 import "./titlebar.mjs";
+import "./themes.js"
 console.log("Legcord");
-
+window.localStorage.setItem("hideNag", "true");
 declare global {
     interface Window {
         legcord: LegcordWindow;
