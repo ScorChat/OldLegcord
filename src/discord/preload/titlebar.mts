@@ -1,7 +1,4 @@
-import { readFileSync } from "node:fs";
-import { platform } from "node:os";
-import { join } from "node:path";
-import { ipcRenderer } from "electron";
+const { ipcRenderer } = require("electron");
 import type { Settings } from "../../@types/settings.js";
 import { addStyle } from "../../common/dom.js";
 const titlebarHTML = `<nav class="titlebar">
@@ -16,7 +13,7 @@ const titlebarHTML = `<nav class="titlebar">
 const titlebarOverlayHTML = `<nav class="titlebar">
           <div class="window-title" id="window-title"></div>
         </nav>`;
-export function injectTitlebar(isOverlay?: boolean): void {
+function injectTitlebar(isOverlay?: boolean): void {
     window.onload = () => {
         const elem = document.createElement("div");
         if (isOverlay) {
@@ -27,11 +24,10 @@ export function injectTitlebar(isOverlay?: boolean): void {
             elem.innerHTML = titlebarHTML;
         }
         document.body.prepend(elem);
-        const titlebarcssPath = join(import.meta.dirname, "../", "/css/titlebar.css");
-        addStyle(readFileSync(titlebarcssPath, "utf8"));
+        addStyle("legcord://assets/css/titlebar.css");
         document.body.setAttribute("customTitlebar", "");
 
-        document.body.setAttribute("legcord-platform", platform());
+        document.body.setAttribute("legcord-platform", ipcRenderer.sendSync("getOS"));
 
         const minimize = document.getElementById("minimize");
         const maximize = document.getElementById("maximize");
@@ -66,4 +62,18 @@ export function injectTitlebar(isOverlay?: boolean): void {
             }
         });
     };
+}
+
+switch (ipcRenderer.sendSync("getConfig", "windowStyle")) {
+    case "default":
+        injectTitlebar(false);
+        break;
+    case "transparent":
+        injectTitlebar(false);
+        break;
+    case "overlay":
+        injectTitlebar(true);
+        break;
+    default:
+        break;
 }

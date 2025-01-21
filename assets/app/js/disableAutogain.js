@@ -36,7 +36,7 @@ function setLegacyChromeConstraint(constraint, name, value) {
     if (!constraint.optional) {
         constraint.optional = [];
     }
-    constraint.optional.push({[name]: value});
+    constraint.optional.push({ [name]: value });
 }
 function setConstraint(constraint, name, value) {
     if (constraint.advanced) {
@@ -70,12 +70,15 @@ function patchFunction(object, name, createNewFunction) {
     }
 }
 
-patchFunction(navigator.mediaDevices, "getUserMedia", function (original) {
-    return function getUserMedia(constraints) {
-        disableAutogain(constraints);
-        return original.call(this, constraints);
-    };
-});
+patchFunction(
+    navigator.mediaDevices,
+    "getUserMedia",
+    (original) =>
+        function getUserMedia(constraints) {
+            disableAutogain(constraints);
+            return original.call(this, constraints);
+        },
+);
 function patchDeprecatedGetUserMedia(original) {
     return function getUserMedia(constraints, success, error) {
         disableAutogain(constraints);
@@ -85,10 +88,13 @@ function patchDeprecatedGetUserMedia(original) {
 patchFunction(navigator, "getUserMedia", patchDeprecatedGetUserMedia);
 patchFunction(navigator, "mozGetUserMedia", patchDeprecatedGetUserMedia);
 patchFunction(navigator, "webkitGetUserMedia", patchDeprecatedGetUserMedia);
-patchFunction(MediaStreamTrack.prototype, "applyConstraints", function (original) {
-    return function applyConstraints(constraints) {
-        disableAutogain(constraints);
-        return original.call(this, constraints);
-    };
-});
+patchFunction(
+    MediaStreamTrack.prototype,
+    "applyConstraints",
+    (original) =>
+        function applyConstraints(constraints) {
+            disableAutogain(constraints);
+            return original.call(this, constraints);
+        },
+);
 console.log("Disable Autogain by Joey Watts!", navigator.mediaDevices.getUserMedia);

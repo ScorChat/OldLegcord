@@ -1,6 +1,8 @@
-export function addStyle(styleString: string): void {
-    const style = document.createElement("style");
-    style.textContent = styleString;
+export function addStyle(styleUrl: string): void {
+    const style = document.createElement("link");
+    style.rel = "stylesheet";
+    style.type = "text/css";
+    style.href = styleUrl;
     document.head.append(style);
 }
 
@@ -13,9 +15,10 @@ export function addTheme(id: string, styleString: string): void {
 
 export function addScript(scriptString: string): void {
     const script = document.createElement("script");
-    script.textContent = scriptString;
+    script.src = scriptString;
     document.body.append(script);
 }
+
 export async function injectJS(inject: string): Promise<void> {
     const js = await (await fetch(`${inject}`)).text();
 

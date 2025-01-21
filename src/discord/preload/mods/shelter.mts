@@ -1,4 +1,4 @@
-import { ipcRenderer, webFrame } from "electron";
+const { ipcRenderer, webFrame } = require("electron");
 import type { ModBundle } from "../../../@types/ModBundle.js";
 
 const requiredPlugins: Record<string, [string, { isVisible: boolean; allowedActions: Record<string, true> }]> = {
@@ -13,9 +13,9 @@ async function inject() {
         await ipcRenderer.invoke("getShelterBundle").then(async (bundle: ModBundle) => {
             if (bundle.enabled) {
                 await webFrame.executeJavaScript(`(()=>{
-                    const SHELTER_INJECTOR_PLUGINS = ${JSON.stringify(requiredPlugins)};
-                    ${bundle.js}
-                })()`);
+                const SHELTER_INJECTOR_PLUGINS = ${JSON.stringify(requiredPlugins)};
+                ${bundle.js}
+            })()`);
             }
         });
     } catch (e) {

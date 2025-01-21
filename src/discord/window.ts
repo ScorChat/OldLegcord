@@ -330,8 +330,8 @@ export function createWindow() {
         backgroundColor: "#202225",
         autoHideMenuBar: true,
         webPreferences: {
-            sandbox: false,
-            preload: path.join(import.meta.dirname, "discord/preload.cjs"),
+            sandbox: true,
+            preload: path.join(import.meta.dirname, "discord/preload.mjs"),
             spellcheck: getConfig("spellcheck"),
         },
     };

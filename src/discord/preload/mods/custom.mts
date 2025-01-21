@@ -1,4 +1,4 @@
-import { ipcRenderer, webFrame } from "electron";
+const { ipcRenderer, webFrame } = require("electron");
 import type { ModBundle } from "../../../@types/ModBundle.js";
 async function inject() {
     try {

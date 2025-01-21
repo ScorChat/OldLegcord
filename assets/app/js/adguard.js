@@ -83,7 +83,7 @@ const hiddenCSS = [
     "ytd-single-option-survey-renderer",
     "ytd-video-masthead-ad-advertiser-info-renderer",
     "ytd-video-masthead-ad-v3-renderer",
-    "YTM-PROMOTED-VIDEO-RENDERER"
+    "YTM-PROMOTED-VIDEO-RENDERER",
 ];
 /**
  * Adds CSS to the page
@@ -108,7 +108,7 @@ const observeDomChanges = (callback) => {
     });
     domMutationObserver.observe(document.documentElement, {
         childList: true,
-        subtree: true
+        subtree: true,
     });
 };
 /**
@@ -197,7 +197,7 @@ const jsonOverride = (propertyName, overrideValue) => {
             // Create a new one and override the JSON inside
             overrideObject(result, propertyName, overrideValue);
             return result;
-        }
+        },
     });
 };
 // Removes ads metadata from YouTube XHR requests
