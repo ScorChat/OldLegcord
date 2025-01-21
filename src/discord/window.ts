@@ -331,6 +331,7 @@ export function createWindow() {
         autoHideMenuBar: true,
         webPreferences: {
             sandbox: true,
+            backgroundThrottling: getConfig("sleepInBackground"),
             preload: path.join(import.meta.dirname, "discord/preload.mjs"),
             spellcheck: getConfig("spellcheck"),
         },

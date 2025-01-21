@@ -16,6 +16,8 @@
     "settings-theme-default": "Default (Custom)",
     "settings-theme-native": "Native",
     "settings-theme-overlay": "Overlay",
+    "settings-sleepInBackground": "Sleep in background",
+    "settings-sleepInBackground-desc": "Enables Chromiums background throttling. This can help save battery life but also breaks notifications.",
     "settings-transparency": "Transparency",
     "settings-transparency-desc": "Set the transparency mode Legcord uses.",
     "settings-transparency-universal": "Universal",

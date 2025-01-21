@@ -221,6 +221,13 @@ export function SettingsPage() {
             >
                 {store.i18n["settings-blockPowerSavingInVoiceChat"]}
             </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-sleepInBackground-desc"]}
+                value={store.settings.sleepInBackground}
+                onChange={(e: boolean) => setConfig("sleepInBackground", e, true)}
+            >
+                {store.i18n["settings-sleepInBackground"]}
+            </SwitchItem>
             <Header class={classes.category} tag={HeaderTags.H5}>
                 {store.i18n["settings-category-debug"]}
             </Header>

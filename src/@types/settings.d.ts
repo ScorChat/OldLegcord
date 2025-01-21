@@ -47,6 +47,7 @@ export interface Settings {
     spellcheckLanguage: string[];
     smoothScroll: boolean;
     popoutPiP: boolean;
+    sleepInBackground: boolean;
     autoScroll: boolean;
     additionalArguments: string;
     modCache?: Record<ValidMods, string>;
