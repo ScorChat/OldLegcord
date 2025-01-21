@@ -1,7 +1,7 @@
 import { addScript, addStyle, injectJS } from "../../common/dom.js";
 import { sleep } from "../../common/sleep.js";
 const { ipcRenderer } = require("electron");
-const version = ipcRenderer.sendSync("displayVersion") as string
+const version = ipcRenderer.sendSync("displayVersion") as string;
 async function load() {
     await sleep(5000).then(() => {
         // dirty hack to make clicking notifications focus Legcord
