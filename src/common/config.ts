@@ -31,7 +31,6 @@ const defaults: Settings = {
     doneSetup: false,
     popoutPiP: false,
     spellcheckLanguage: ["en-US"],
-    disableTitlebarChecks: false,
     sleepInBackground: false,
     bitrateMin: 500000,
     bitrateMax: 8000000,
