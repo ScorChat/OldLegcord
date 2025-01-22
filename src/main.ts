@@ -135,6 +135,9 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
                 case "notifications":
                     callback(true);
                     break;
+                case "clipboard-sanitized-write":
+                    callback(true);
+                    break;
                 case "media": {
                     if (process.platform === "darwin") {
                         console.log(`microphone access: ${systemPreferences.getMediaAccessStatus("microphone")}`);
