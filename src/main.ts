@@ -100,7 +100,18 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     } else if (getConfig("hardwareAcceleration") === undefined) {
         setConfig("hardwareAcceleration", true); // pre 3.3.0
     }
-    if (getConfig("audio") === undefined) setConfig("audio", "loopbackWithMute");
+    if (getConfig("audio") === undefined)
+        setConfig("audio", {
+            workaround: false,
+            deviceSelect: true,
+            granularSelect: true,
+            ignoreVirtual: false,
+            ignoreDevices: false,
+            ignoreInputMedia: false,
+            onlySpeakers: false,
+            onlyDefaultSpeakers: true,
+            loopbackType: "loopback",
+        });
     if (getConfig("keybinds") === undefined) setConfig("keybinds", []);
     if (getConfig("additionalArguments") === undefined) setConfig("additionalArguments", "");
     if (getConfig("transparency") === undefined) setConfig("transparency", "none");
@@ -163,8 +174,8 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
                         );
                     } else {
                         callback(true);
+                        break;
                     }
-                    break;
                 }
             }
         });

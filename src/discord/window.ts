@@ -27,6 +27,7 @@ import { setMenu } from "./menu.js";
 import { registerCustomHandler } from "./screenshare.js";
 import { mainTouchBar } from "./touchbar.js";
 import { createTray, tray } from "./tray.js";
+import { registerVenmicIpc } from "./venmic.js";
 export let mainWindows: BrowserWindow[] = [];
 export let inviteWindow: BrowserWindow;
 
@@ -66,6 +67,7 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
 
     const ignoreProtocolWarning = getConfig("ignoreProtocolWarning");
     registerIpc(passedWindow);
+    registerVenmicIpc();
     if (getConfig("mobileMode")) {
         passedWindow.webContents.userAgent =
             "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.149 Mobile Safari/537.36";
@@ -95,7 +97,7 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
             })();
         });
     }
-    app.on("activate", () => {
+    app.on("activate", async () => {
         app.show();
     });
     passedWindow.webContents.on("frame-created", (_, { frame }) => {
@@ -116,7 +118,10 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         if (url === "about:blank") return { action: "allow" };
         // Saving ics files on future events
         if (url.startsWith("blob:https://discord.com/")) {
-            return { action: "allow", overrideBrowserWindowOptions: { show: false } };
+            return {
+                action: "allow",
+                overrideBrowserWindowOptions: { show: false },
+            };
         }
         // Allow Discord stream popout
         if (
@@ -169,7 +174,9 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
     registerCustomHandler();
 
     passedWindow.webContents.session.webRequest.onBeforeRequest(
-        { urls: ["https://*/api/v*/science", "https://sentry.io/*", "https://*.nel.cloudflare.com/*"] },
+        {
+            urls: ["https://*/api/v*/science", "https://sentry.io/*", "https://*.nel.cloudflare.com/*"],
+        },
         (_, callback) => callback({ cancel: true }),
     );
     // fix UMG video playback
@@ -331,6 +338,8 @@ export function createWindow() {
         autoHideMenuBar: true,
         webPreferences: {
             sandbox: true,
+            nodeIntegration: false,
+            contextIsolation: true,
             backgroundThrottling: getConfig("sleepInBackground"),
             preload: path.join(import.meta.dirname, "discord/preload.mjs"),
             spellcheck: getConfig("spellcheck"),

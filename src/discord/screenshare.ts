@@ -32,7 +32,11 @@ export function registerCustomHandler(): void {
                         case "win32":
                         case "linux":
                             options = { video: result };
-                            if (audio) options = { video: result, audio: getConfig("audio") };
+                            if (audio)
+                                options = {
+                                    video: result,
+                                    audio: getConfig("audio").loopbackType,
+                                };
                             callback(options);
                             break;
                         default:

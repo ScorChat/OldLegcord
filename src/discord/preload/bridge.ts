@@ -3,6 +3,7 @@ import type { Keybind } from "../../@types/keybind.js";
 import type { LegcordWindow } from "../../@types/legcordWindow.d.ts";
 import type { Settings } from "../../@types/settings.js";
 import type { ThemeManifest } from "../../@types/themeManifest.js";
+import type { venmicListObject } from "../venmic.js";
 
 interface IPCSources {
     id: string;
@@ -46,11 +47,29 @@ contextBridge.exposeInMainWorld("legcord", {
             return result as string;
         }),
     screenshare: {
-        getSources: (sources: (event: Electron.IpcRendererEvent, ...args: IPCSources[]) => void) => {
-            ipcRenderer.on("getSources", sources);
+        getSources: (
+            callback: (event: Electron.IpcRendererEvent, sources: IPCSources[], ...args: unknown[]) => void,
+        ) => {
+            ipcRenderer.on("getSources", callback);
         },
         start: (source: string, name: string, audio: boolean) =>
             ipcRenderer.send("startScreenshare", source, name, audio),
+        venmicStart: async (include: Node[]) =>
+            await ipcRenderer.invoke("venmicStart", include).then((result) => {
+                return result as venmicListObject;
+            }),
+        venmicSystemStart: async (exclude: Node[]) =>
+            await ipcRenderer.invoke("venmicSystemStart", exclude).then((result) => {
+                return result as boolean;
+            }),
+        venmicList: async () =>
+            await ipcRenderer.invoke("venmicList").then((result) => {
+                return result as undefined;
+            }),
+        venmicStop: async () =>
+            await ipcRenderer.invoke("venmicStop").then((result) => {
+                return result as undefined;
+            }),
     },
     version: ipcRenderer.sendSync("get-app-version", "app-version") as string,
     platform: ipcRenderer.sendSync("getOS") as string,

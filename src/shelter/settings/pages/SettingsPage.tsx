@@ -43,7 +43,7 @@ export function SettingsPage() {
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-invitewebsocket-desc"]}
-                value={store.settings.inviteWebsocket}
+                value={settings.inviteWebsocket}
                 onChange={(e: boolean) => setConfig("inviteWebsocket", e, true)}
             >
                 {store.i18n["settings-invitewebsocket"]}
@@ -52,7 +52,7 @@ export function SettingsPage() {
                 {store.i18n["settings-category-lookAndFeel"]}
             </Header>
             <DropdownItem
-                value={store.settings.windowStyle}
+                value={settings.windowStyle}
                 onChange={(e) =>
                     setConfig("windowStyle", (e.target as HTMLInputElement).value as Settings["windowStyle"], true)
                 }
@@ -82,7 +82,7 @@ export function SettingsPage() {
                 <option value="none">{store.i18n["settings-none"]}</option>
             </DropdownItem>
             <DropdownItem
-                value={store.settings.tray}
+                value={settings.tray}
                 onChange={(e) => setConfig("tray", (e.target as HTMLInputElement).value as Settings["tray"], true)}
                 title={store.i18n["settings-trayIcon"]}
                 note={store.i18n["settings-trayIcon-desc"]}
@@ -99,14 +99,14 @@ export function SettingsPage() {
             </DropdownItem>
             <SwitchItem
                 note={store.i18n["settings-skipSplash-desc"]}
-                value={store.settings.skipSplash}
+                value={settings.skipSplash}
                 onChange={(e: boolean) => setConfig("skipSplash", e)}
             >
                 {store.i18n["settings-skipSplash"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-mobileMode-desc"]}
-                value={store.settings.mobileMode}
+                value={settings.mobileMode}
                 onChange={(e: boolean) => setConfig("mobileMode", e, true)}
             >
                 {store.i18n["settings-mobileMode"]}
@@ -115,7 +115,7 @@ export function SettingsPage() {
                 Behaviour
             </Header>
             <DropdownItem
-                value={store.settings.channel}
+                value={settings.channel}
                 onChange={(e) =>
                     setConfig("channel", (e.target as HTMLInputElement).value as Settings["channel"], true)
                 }
@@ -129,14 +129,14 @@ export function SettingsPage() {
             </DropdownItem>
             <SwitchItem
                 note={store.i18n["settings-MultiInstance-desc"]}
-                value={store.settings.multiInstance}
+                value={settings.multiInstance}
                 onChange={(e: boolean) => setConfig("multiInstance", e)}
             >
                 {store.i18n["settings-MultiInstance"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-popoutPiP-desc"]}
-                value={store.settings.popoutPiP}
+                value={settings.popoutPiP}
                 onChange={(e: boolean) => setConfig("popoutPiP", e)}
             >
                 {store.i18n["settings-popoutPiP"]}
@@ -144,7 +144,7 @@ export function SettingsPage() {
             <Show when={window.legcord.platform === "darwin"}>
                 <SwitchItem
                     note={store.i18n["settings-useMacSystemPicker-desc"]}
-                    value={store.settings.useMacSystemPicker}
+                    value={settings.useMacSystemPicker}
                     onChange={(e: boolean) => setConfig("useMacSystemPicker", e)}
                 >
                     {store.i18n["settings-useMacSystemPicker"]}
@@ -152,42 +152,42 @@ export function SettingsPage() {
             </Show>
             <SwitchItem
                 note={store.i18n["settings-disableAutogain-desc"]}
-                value={store.settings.disableAutogain}
+                value={settings.disableAutogain}
                 onChange={(e: boolean) => setConfig("disableAutogain", e)}
             >
                 {store.i18n["settings-disableAutogain"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-mintoTray-desc"]}
-                value={store.settings.minimizeToTray}
+                value={settings.minimizeToTray}
                 onChange={(e: boolean) => setConfig("minimizeToTray", e)}
             >
                 {store.i18n["settings-mintoTray"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-startMinimized-desc"]}
-                value={store.settings.startMinimized}
+                value={settings.startMinimized}
                 onChange={(e: boolean) => setConfig("startMinimized", e)}
             >
                 {store.i18n["settings-startMinimized"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-smoothScroll-desc"]}
-                value={store.settings.smoothScroll}
+                value={settings.smoothScroll}
                 onChange={(e: boolean) => setConfig("smoothScroll", e, true)}
             >
                 {store.i18n["settings-smoothScroll"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-autoScroll-desc"]}
-                value={store.settings.autoScroll}
+                value={settings.autoScroll}
                 onChange={(e: boolean) => setConfig("autoScroll", e, true)}
             >
                 {store.i18n["settings-autoScroll"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-spellcheck-desc"]}
-                value={store.settings.spellcheck}
+                value={settings.spellcheck}
                 onChange={(e: boolean) => setConfig("spellcheck", e, true)}
             >
                 {store.i18n["settings-spellcheck"]}
@@ -196,7 +196,7 @@ export function SettingsPage() {
                 Power Management
             </Header>
             <DropdownItem
-                value={store.settings.performanceMode}
+                value={settings.performanceMode}
                 onChange={(e) =>
                     setConfig(
                         "performanceMode",
@@ -216,7 +216,7 @@ export function SettingsPage() {
             </DropdownItem>
             <SwitchItem
                 note={store.i18n["settings-blockPowerSavingInVoiceChat-desc"]}
-                value={store.settings.blockPowerSavingInVoiceChat}
+                value={settings.blockPowerSavingInVoiceChat}
                 onChange={(e: boolean) => setConfig("blockPowerSavingInVoiceChat", e, true)}
             >
                 {store.i18n["settings-blockPowerSavingInVoiceChat"]}
@@ -231,9 +231,102 @@ export function SettingsPage() {
             <Header class={classes.category} tag={HeaderTags.H5}>
                 {store.i18n["settings-category-debug"]}
             </Header>
+            <SwitchItem
+                note={store.i18n["settings-venmic-deviceSelect-desc"]}
+                value={settings.audio.deviceSelect}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.deviceSelect = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-deviceSelect"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-granularSelect-desc"]}
+                value={settings.audio.granularSelect}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.granularSelect = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-granularSelect"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-workaround-desc"]}
+                value={settings.audio.workaround}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.workaround = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-workaround"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-ignoreVirtual-desc"]}
+                value={settings.audio.ignoreVirtual}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.ignoreVirtual = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-ignoreVirtual"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-ignoreDevices-desc"]}
+                value={settings.audio.ignoreDevices}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.ignoreDevices = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-ignoreDevices"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-ignoreInputMedia-desc"]}
+                value={settings.audio.ignoreInputMedia}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.ignoreInputMedia = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-ignoreInputMedia"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-onlySpeakers-desc"]}
+                value={settings.audio.onlySpeakers}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.onlySpeakers = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-onlySpeakers"]}
+            </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-venmic-onlyDefaultSpeakers-desc"]}
+                value={settings.audio.onlyDefaultSpeakers}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.onlyDefaultSpeakers = e;
+                    setConfig("audio", audioSettings);
+                }}
+            >
+                {store.i18n["settings-venmic-onlyDefaultSpeakers"]}
+            </SwitchItem>
             <DropdownItem
-                value={store.settings.audio}
-                onChange={(e) => setConfig("audio", (e.target as HTMLInputElement).value as Settings["audio"])}
+                value={settings.audio.loopbackType}
+                onChange={(e) => {
+                    const audioSettings = structuredClone({ ...settings.audio });
+                    audioSettings.loopbackType = (e.target as HTMLInputElement)
+                        .value as Settings["audio"]["loopbackType"];
+                    setConfig("audio", audioSettings);
+                }}
                 title={store.i18n["settings-audio"]}
                 note={store.i18n["settings-audio-desc"]}
                 link="https://www.electronjs.org/docs/latest/api/session#sessetdisplaymediarequesthandlerhandler-opts"
@@ -243,40 +336,22 @@ export function SettingsPage() {
             </DropdownItem>
             <SwitchItem
                 note={store.i18n["settings-hardwareAcceleration-desc"]}
-                value={store.settings.hardwareAcceleration}
+                value={settings.hardwareAcceleration}
                 onChange={(e: boolean) => setConfig("hardwareAcceleration", e, true)}
             >
                 {store.i18n["settings-hardwareAcceleration"]}
             </SwitchItem>
             <SwitchItem
                 note={store.i18n["settings-disableHttpCache-desc"]}
-                value={store.settings.disableHttpCache}
+                value={settings.disableHttpCache}
                 onChange={(e: boolean) => setConfig("disableHttpCache", e, true)}
             >
                 {store.i18n["settings-disableHttpCache"]}
             </SwitchItem>
             <TextBoxItem
-                title={store.i18n["settings-bitrateMin"]}
-                note={store.i18n["settings-bitrateMin-desc"]}
-                value={store.settings.bitrateMin}
-                onInput={(v: string) => setConfig("bitrateMin", Number(v))}
-            />
-            <TextBoxItem
-                title={store.i18n["settings-bitrateMax"]}
-                note={store.i18n["settings-bitrateMax-desc"]}
-                value={store.settings.bitrateMax}
-                onInput={(v: string) => setConfig("bitrateMax", Number(v))}
-            />
-            <TextBoxItem
-                title={store.i18n["settings-bitrateTarget"]}
-                note={store.i18n["settings-bitrateTarget-desc"]}
-                value={store.settings.bitrateTarget}
-                onInput={(v: string) => setConfig("bitrateTarget", Number(v))}
-            />
-            <TextBoxItem
                 title={store.i18n["settings-additionalArguments"]}
                 note={store.i18n["settings-additionalArguments-desc"]}
-                value={store.settings.additionalArguments}
+                value={settings.additionalArguments}
                 onInput={(v: string) => setConfig("additionalArguments", v)}
             />
             <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.openCustomIconDialog}>

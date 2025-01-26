@@ -11,6 +11,7 @@ import { getLang, getLangName, getRawLang, setLang } from "../common/lang.js";
 import { installTheme, setThemeEnabled, uninstallTheme } from "../common/themes.js";
 import { getDisplayVersion, getVersion } from "../common/version.js";
 import { isPowerSavingEnabled, setPowerSaving } from "../power.js";
+import constPaths from "../shared/consts/paths.js";
 import { splashWindow } from "../splash/main.js";
 import { refreshGlobalKeybinds } from "./globalKeybinds.js";
 import { importGuilds, mainTouchBar, setVoiceState, voiceTouchBar } from "./touchbar.js";
@@ -275,5 +276,8 @@ export function registerIpc(passedWindow: BrowserWindow): void {
                 console.log(result.filePaths[0]);
                 setConfig("customIcon", result.filePaths[0]);
             });
+    });
+    ipcMain.on("getConstPaths", (event) => {
+        event.returnValue = constPaths;
     });
 }

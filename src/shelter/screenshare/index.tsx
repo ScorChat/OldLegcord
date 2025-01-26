@@ -1,3 +1,4 @@
+import type { Node } from "@vencord/venmic";
 import { ScreensharePicker } from "./components/ScreensharePicker.jsx";
 import type { IPCSources } from "./components/SourceCard.jsx";
 
@@ -38,11 +39,23 @@ function onStreamQualityChange() {
         );
     }
 }
-export function onLoad() {
+export async function onLoad() {
     log("Legcord Screenshare Module");
     // @ts-expect-error fix types
-    window.legcord.screenshare.getSources((_event: Event, sources: IPCSources[]) => {
-        openModal(({ close }: { close: () => void }) => <ScreensharePicker sources={sources} close={close} />);
+    window.legcord.screenshare.getSources(async (_event: Event, sources: IPCSources[]) => {
+        let audioSources: Node[] | undefined;
+        if (window.legcord.platform === "linux") {
+            const venmic = await window.legcord.screenshare.venmicList();
+            if (venmic.ok) {
+                audioSources = venmic.targets;
+                console.log(`Venmic audio source targets: ${audioSources.map((node) => node["node.name"])}`);
+            } else {
+                console.log("Venmic is NOT OK. Venmic will not be available for screensharing with audio.");
+            }
+        }
+        openModal(({ close }: { close: () => void }) => (
+            <ScreensharePicker sources={sources} close={close} audioSources={audioSources} />
+        ));
     });
     dispatcher.subscribe("MEDIA_ENGINE_VIDEO_SOURCE_QUALITY_CHANGED", onStreamQualityChange);
 }

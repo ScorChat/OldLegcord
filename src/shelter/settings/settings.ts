@@ -18,7 +18,7 @@ export function refreshThemes() {
 
 export function setConfig<K extends keyof Settings>(key: K, value: Settings[K], shouldRestart?: boolean) {
     settings[key] = value;
-    console.log(`${key}: ${store.settings[key]}`);
+    console.log(key, ":", store.settings[key]);
     if (shouldRestart) {
         isRestartRequired = true;
     }
