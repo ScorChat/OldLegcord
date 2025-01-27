@@ -102,7 +102,7 @@ export const ScreensharePicker = (props: {
                             </Dropdown>
                         </div>
                         <div>
-                            <Show when={window.legcord.platform === "darwin"}>
+                            <Show when={window.legcord.platform !== "darwin"}>
                                 <Header tag={HeaderTags.H4}>Audio</Header>
                                 <div class={classes.checkbox}>
                                     <Checkbox checked={audio()} onChange={setAudio} />
@@ -111,7 +111,9 @@ export const ScreensharePicker = (props: {
                         </div>
                     </div>
 
-                    <Show when={true}>
+                    <Show when={
+                                    window.legcord.platform === "linux" && props.audioSources !== undefined && audio()
+                                }>
                         <Divider mt mb />
                         <Header tag={HeaderTags.H4}>Venmic</Header>
                         <Dropdown
