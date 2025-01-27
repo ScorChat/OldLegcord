@@ -1,8 +1,9 @@
+import { existsSync, mkdirSync } from "node:fs";
 import { copyFile } from "node:fs/promises";
 
 async function copyVenmic() {
     if (process.platform !== "linux") return;
-
+    if (!existsSync("./dist")) mkdirSync("./dist");
     return Promise.all([
         copyFile(
             "./node_modules/@vencord/venmic/prebuilds/venmic-addon-linux-x64/node-napi-v7.node",
