@@ -102,33 +102,7 @@ export const ScreensharePicker = (props: {
                             </Dropdown>
                         </div>
                         <div>
-                            <Show
-                                when={
-                                    window.legcord.platform === "linux" && props.audioSources !== undefined && audio()
-                                }
-                            >
-                                <Header tag={HeaderTags.H4}>Venmic</Header>
-                                <Dropdown
-                                    value="Venmic disabled"
-                                    onChange={(e) => {
-                                        const source = props.audioSources!.find(
-                                            (node) => node["node.name"] === e.currentTarget.value,
-                                        );
-                                        if (!source) return;
-                                        setAudioSource(source);
-                                    }}
-                                >
-                                    <option value="Venmic disabled">Venmic disabled</option>
-                                    <For each={props.audioSources}>
-                                        {(source: Node) => (
-                                            <option value={source["node.name"]}>{source["node.name"]}</option>
-                                        )}
-                                    </For>
-                                </Dropdown>
-                            </Show>
-                        </div>
-                        <div>
-                            <Show when={window.legcord.platform !== "darwin"}>
+                            <Show when={window.legcord.platform === "darwin"}>
                                 <Header tag={HeaderTags.H4}>Audio</Header>
                                 <div class={classes.checkbox}>
                                     <Checkbox checked={audio()} onChange={setAudio} />
@@ -136,6 +110,26 @@ export const ScreensharePicker = (props: {
                             </Show>
                         </div>
                     </div>
+
+                    <Show when={true}>
+                        <Divider mt mb />
+                        <Header tag={HeaderTags.H4}>Venmic</Header>
+                        <Dropdown
+                            value="Venmic disabled"
+                            onChange={(e) => {
+                                const source = props.audioSources!.find(
+                                    (node) => node["node.name"] === e.currentTarget.value,
+                                );
+                                if (!source) return;
+                                setAudioSource(source);
+                            }}
+                        >
+                            <option value="Venmic disabled">Venmic disabled</option>
+                            <For each={props.audioSources}>
+                                {(source: Node) => <option value={source["node.name"]}>{source["node.name"]}</option>}
+                            </For>
+                        </Dropdown>
+                    </Show>
                 </div>
             </ModalBody>
             <ModalConfirmFooter confirmText="Share" onConfirm={startScreenshare} close={closeAndSave} />
