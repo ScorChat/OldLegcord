@@ -231,94 +231,96 @@ export function SettingsPage() {
             <Header class={classes.category} tag={HeaderTags.H5}>
                 {store.i18n["settings-category-debug"]}
             </Header>
-            <SwitchItem
-                note={store.i18n["settings-venmic-deviceSelect-desc"]}
-                value={settings.audio.deviceSelect}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.deviceSelect = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-deviceSelect"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-granularSelect-desc"]}
-                value={settings.audio.granularSelect}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.granularSelect = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-granularSelect"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-workaround-desc"]}
-                value={settings.audio.workaround}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.workaround = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-workaround"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-ignoreVirtual-desc"]}
-                value={settings.audio.ignoreVirtual}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.ignoreVirtual = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-ignoreVirtual"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-ignoreDevices-desc"]}
-                value={settings.audio.ignoreDevices}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.ignoreDevices = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-ignoreDevices"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-ignoreInputMedia-desc"]}
-                value={settings.audio.ignoreInputMedia}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.ignoreInputMedia = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-ignoreInputMedia"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-onlySpeakers-desc"]}
-                value={settings.audio.onlySpeakers}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.onlySpeakers = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-onlySpeakers"]}
-            </SwitchItem>
-            <SwitchItem
-                note={store.i18n["settings-venmic-onlyDefaultSpeakers-desc"]}
-                value={settings.audio.onlyDefaultSpeakers}
-                onChange={(e) => {
-                    const audioSettings = structuredClone({ ...settings.audio });
-                    audioSettings.onlyDefaultSpeakers = e;
-                    setConfig("audio", audioSettings);
-                }}
-            >
-                {store.i18n["settings-venmic-onlyDefaultSpeakers"]}
-            </SwitchItem>
+            <Show when={window.legcord.platform === "linux"}>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-deviceSelect-desc"]}
+                    value={settings.audio.deviceSelect}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.deviceSelect = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-deviceSelect"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-granularSelect-desc"]}
+                    value={settings.audio.granularSelect}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.granularSelect = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-granularSelect"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-workaround-desc"]}
+                    value={settings.audio.workaround}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.workaround = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-workaround"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-ignoreVirtual-desc"]}
+                    value={settings.audio.ignoreVirtual}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.ignoreVirtual = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-ignoreVirtual"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-ignoreDevices-desc"]}
+                    value={settings.audio.ignoreDevices}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.ignoreDevices = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-ignoreDevices"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-ignoreInputMedia-desc"]}
+                    value={settings.audio.ignoreInputMedia}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.ignoreInputMedia = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-ignoreInputMedia"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-onlySpeakers-desc"]}
+                    value={settings.audio.onlySpeakers}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.onlySpeakers = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-onlySpeakers"]}
+                </SwitchItem>
+                <SwitchItem
+                    note={store.i18n["settings-venmic-onlyDefaultSpeakers-desc"]}
+                    value={settings.audio.onlyDefaultSpeakers}
+                    onChange={(e) => {
+                        const audioSettings = structuredClone({ ...settings.audio });
+                        audioSettings.onlyDefaultSpeakers = e;
+                        setConfig("audio", audioSettings);
+                    }}
+                >
+                    {store.i18n["settings-venmic-onlyDefaultSpeakers"]}
+                </SwitchItem>
+            </Show>
             <DropdownItem
                 value={settings.audio.loopbackType}
                 onChange={(e) => {
