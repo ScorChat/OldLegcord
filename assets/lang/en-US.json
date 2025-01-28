@@ -49,6 +49,8 @@
     "settings-mintoTray-desc": "When disabled, Legcord will close like any other window when closed, otherwise it'll sit back and relax in your system tray for later.",
     "settings-startMinimized": "Start minimized",
     "settings-startMinimized-desc": "Legcord starts in background and remains out of your way.",
+    "settings-useSystemCssEditor": "Use system CSS editor",
+    "settings-useSystemCssEditor-desc": "Use system CSS editor to edit CSS.",
     "settings-MultiInstance": "Multi Instance",
     "settings-MultiInstance-desc": "When enabled you'll be able to start up many instances of Legcord.",
     "settings-hardwareAcceleration": "Hardware acceleration",

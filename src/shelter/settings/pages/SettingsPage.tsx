@@ -141,6 +141,13 @@ export function SettingsPage() {
             >
                 {store.i18n["settings-popoutPiP"]}
             </SwitchItem>
+            <SwitchItem
+                note={store.i18n["settings-useSystemCssEditor-desc"]}
+                value={settings.useSystemCssEditor}
+                onChange={(e: boolean) => setConfig("useSystemCssEditor", e)}
+            >
+                {store.i18n["settings-useSystemCssEditor"]}
+            </SwitchItem>
             <Show when={window.legcord.platform === "darwin"}>
                 <SwitchItem
                     note={store.i18n["settings-useMacSystemPicker-desc"]}
