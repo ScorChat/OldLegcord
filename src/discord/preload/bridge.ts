@@ -83,6 +83,7 @@ contextBridge.exposeInMainWorld("legcord", {
         set: (id: string, state: boolean) => ipcRenderer.send("setThemeEnabled", id, state),
         folder: (id: string) => ipcRenderer.send("openThemeFolder", id),
         openQuickCssFile: () => ipcRenderer.send("openQuickCssFile"),
+        openQuickCssEditor: () => ipcRenderer.send("openCssEditor"),
     },
 } as unknown as LegcordWindow);
 

@@ -10,6 +10,7 @@ import { getConfig, getConfigLocation, setConfig, setConfigBulk } from "../commo
 import { getLang, getLangName, getRawLang, setLang } from "../common/lang.js";
 import { installTheme, setThemeEnabled, uninstallTheme } from "../common/themes.js";
 import { getDisplayVersion, getVersion } from "../common/version.js";
+import { openCssEditor } from "../cssEditor/main.js";
 import { isPowerSavingEnabled, setPowerSaving } from "../power.js";
 import constPaths from "../shared/consts/paths.js";
 import { splashWindow } from "../splash/main.js";
@@ -59,6 +60,9 @@ export function registerIpc(passedWindow: BrowserWindow): void {
     });
 
     // theming
+    ipcMain.on("openCssEditor", () => {
+        openCssEditor();
+    });
     ipcMain.on("openThemesFolder", () => {
         shell.showItemInFolder(themesPath);
     });

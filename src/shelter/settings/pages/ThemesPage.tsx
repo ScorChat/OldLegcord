@@ -25,12 +25,20 @@ export function ThemesPage() {
             duration: 3000,
         });
     }
+
+    function openQuickCss() {
+        if (store.settings.useSystemCssEditor) {
+            window.legcord.themes.openQuickCssFile();
+        } else {
+            window.legcord.themes.openQuickCssEditor();
+        }
+    }
     return (
         <>
             <Header tag={HeaderTags.H1}>Themes</Header>
             <Divider mt mb />
             <div class={classes.buttonBox}>
-                <Button size={ButtonSizes.LARGE} onClick={window.legcord.themes.openQuickCssFile}>
+                <Button size={ButtonSizes.LARGE} onClick={openQuickCss}>
                     Open Quick CSS file
                 </Button>
                 <Button size={ButtonSizes.LARGE} onClick={window.legcord.themes.openImportPicker}>

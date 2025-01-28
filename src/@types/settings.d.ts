@@ -59,6 +59,7 @@ export interface Settings {
     smoothScroll: boolean;
     popoutPiP: boolean;
     sleepInBackground: boolean;
+    useSystemCssEditor: boolean;
     autoScroll: boolean;
     additionalArguments: string;
     modCache?: Record<ValidMods, string>;

@@ -39,3 +39,8 @@ export function onLoad() {
         setTimeout(() => window.legcord.touchbar.importGuilds(getAllGuilds()), 5000);
     }
 }
+
+export function onUnload() {
+    dispatcher.unsubscribe("AUDIO_TOGGLE_SELF_MUTE", updateVoiceState);
+    dispatcher.unsubscribe("AUDIO_TOGGLE_SELF_DEAF", updateVoiceState);
+}

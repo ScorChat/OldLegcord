@@ -46,6 +46,7 @@ const defaults: Settings = {
     customIcon: join(import.meta.dirname, "../", "/assets/desktop.png"),
     smoothScroll: true,
     autoScroll: false,
+    useSystemCssEditor: false,
 };
 export function checkForDataFolder(): void {
     const dataPath = join(dirname(app.getPath("exe")), "legcord-data");
