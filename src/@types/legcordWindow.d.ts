@@ -51,11 +51,10 @@ export interface LegcordWindow {
     themes: {
         install: (url: string) => void;
         openImportPicker: () => void;
-        openQuickCssEditor: () => void;
         uninstall: (id: string) => void;
         set: (id: string, state: boolean) => void;
         getThemes: () => Readonly<ThemeManifest[]>;
-        openQuickCssFile: () => void;
+        openQuickCss: () => void;
         edit: (id: string) => void;
         folder: (id: string) => void;
     };

@@ -60,8 +60,12 @@ export function registerIpc(passedWindow: BrowserWindow): void {
     });
 
     // theming
-    ipcMain.on("openCssEditor", () => {
-        openCssEditor();
+    ipcMain.on("openQuickCss", () => {
+        if (getConfig("useSystemCssEditor")) {
+            void shell.openPath(quickCssPath);
+        } else {
+            openCssEditor(quickCssPath);
+        }
     });
     ipcMain.on("openThemesFolder", () => {
         shell.showItemInFolder(themesPath);
@@ -93,7 +97,11 @@ export function registerIpc(passedWindow: BrowserWindow): void {
     });
     ipcMain.on("editTheme", (_event, id: string) => {
         const manifest = JSON.parse(readFileSync(`${themesPath}/${id}/manifest.json`, "utf8")) as ThemeManifest;
-        void shell.openPath(`${themesPath}/${id}/${manifest.theme}`);
+        if (getConfig("useSystemCssEditor")) {
+            void shell.openPath(`${themesPath}/${id}/${manifest.theme}`);
+        } else {
+            openCssEditor(`${themesPath}/${id}/${manifest.theme}`);
+        }
     });
     ipcMain.on("openThemeFolder", (_event, id: string) => {
         void shell.openPath(path.join(themesPath, id));
@@ -242,9 +250,6 @@ export function registerIpc(passedWindow: BrowserWindow): void {
     });
     ipcMain.on("openPluginsFolder", () => {
         shell.showItemInFolder(pluginsPath);
-    });
-    ipcMain.on("openQuickCssFile", () => {
-        void shell.openPath(quickCssPath);
     });
     ipcMain.on("openCrashesFolder", () => {
         shell.showItemInFolder(path.join(app.getPath("temp"), `${app.getName()} Crashes`));
