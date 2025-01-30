@@ -41,6 +41,7 @@
         "@uwu/shelter-defs": "^1.4.1",
         "electron": "34.0.1",
         "electron-builder": "^25.1.8",
+        "lucide-react": "^0.474.0",
         "rollup": "^4.27.4",
         "rollup-plugin-copy": "^3.5.0",
         "rollup-plugin-esbuild": "^6.1.1",
@@ -52,6 +53,7 @@
         "electron-context-menu": "^4.0.4",
         "electron-is-dev": "^3.0.1",
         "electron-updater": "^6.3.9",
+        "solid-motionone": "^1.0.3",
         "tsx": "^4.19.2",
         "ws": "^8.18.0"
     },
