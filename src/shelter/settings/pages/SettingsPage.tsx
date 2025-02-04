@@ -351,6 +351,13 @@ export function SettingsPage() {
                 {store.i18n["settings-hardwareAcceleration"]}
             </SwitchItem>
             <SwitchItem
+                note={store.i18n["settings-noBundleUpdates-desc"]}
+                value={settings.noBundleUpdates}
+                onChange={(e: boolean) => setConfig("noBundleUpdates", e, true)}
+            >
+                {store.i18n["settings-noBundleUpdates"]}
+            </SwitchItem>
+            <SwitchItem
                 note={store.i18n["settings-disableHttpCache-desc"]}
                 value={settings.disableHttpCache}
                 onChange={(e: boolean) => setConfig("disableHttpCache", e, true)}

@@ -53,6 +53,8 @@
     "settings-useSystemCssEditor-desc": "Use system CSS editor to edit CSS.",
     "settings-MultiInstance": "Multi Instance",
     "settings-MultiInstance-desc": "When enabled you'll be able to start up many instances of Legcord.",
+    "settings-noBundleUpdates": "No bundle updates",
+    "settings-noBundleUpdates-desc": "Disables automatic updates for client mods.",
     "settings-hardwareAcceleration": "Hardware acceleration",
     "settings-hardwareAcceleration-desc": "Hardware acceleration uses your GPU to make Legcord run faster. If you're experiencing visual glitches, try disabling this.",
     "settings-blockPowerSavingInVoiceChat": "Block power saving in voice chat",

@@ -62,5 +62,6 @@ export interface Settings {
     useSystemCssEditor: boolean;
     autoScroll: boolean;
     additionalArguments: string;
+    noBundleUpdates: boolean;
     modCache?: Record<ValidMods, string>;
 }

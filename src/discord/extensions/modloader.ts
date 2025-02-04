@@ -62,6 +62,7 @@ async function cacheCheck(mod: ValidMods) {
 }
 
 export async function fetchMods() {
+    if (getConfig("noBundleUpdates")) return;
     if (typeof getConfig("mods") === "string") {
         setConfig("mods", [getConfig("mods") as unknown as ValidMods]); // pre 3.3.2
     }

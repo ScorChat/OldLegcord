@@ -42,6 +42,7 @@ const defaults: Settings = {
     popoutPiP: false,
     spellcheckLanguage: ["en-US"],
     sleepInBackground: false,
+    noBundleUpdates: false,
     additionalArguments: "",
     customIcon: join(import.meta.dirname, "../", "/assets/desktop.png"),
     smoothScroll: true,
