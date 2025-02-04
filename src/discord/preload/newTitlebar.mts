@@ -15,12 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     //if (!targetElement?.classList.toString().includes("anchor")) return;
     addStyle("legcord://assets/css/newTitlebar.css");
 
-
     document.body.setAttribute("legcord-platform", "win32");
     if (targetElement) {
         targetElement.append(titlebarHTML);
         document.body.setAttribute("customTitlebar", "");
     } else {
-        alert(1)
+        alert(1);
     }
 });
