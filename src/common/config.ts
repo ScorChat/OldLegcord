@@ -34,6 +34,7 @@ const defaults: Settings = {
     customJsBundle: "https://legcord.app/placeholder.js",
     customCssBundle: "https://legcord.app/placeholder.css",
     disableAutogain: false,
+    autoHideMenuBar: true,
     blockPowerSavingInVoiceChat: false,
     useMacSystemPicker: true,
     mobileMode: false,

@@ -8,7 +8,7 @@
     },
     "scripts": {
         "build:dev": "rollup -c --environment BUILD:dev && tsx scripts/copyVenmic.mts",
-        "build:plugins": "lune ci --repoSubDir src/shelter --to ts-out/plugins && node ./scripts/fixBundles.js",
+        "build:plugins": "lune ci --repoSubDir src/shelter --to ts-out/plugins",
         "build": "pnpm build:plugins && rollup -c --environment BUILD:prod",
         "start": "pnpm build:plugins && pnpm run build:dev && electron --trace-warnings --ozone-platform-hint=auto ./ts-out/main.js",
         "startThemeManager": "pnpm run build:dev && electron ./ts-out/main.js themes",

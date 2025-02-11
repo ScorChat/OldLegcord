@@ -16,6 +16,8 @@
     "settings-theme-default": "Default (Custom)",
     "settings-theme-native": "Native",
     "settings-theme-overlay": "Overlay",
+    "settings-autoHideMenuBar": "Auto-hide menu bar",
+    "settings-autoHideMenuBar-desc": "Auto-hide menu bar when not in use.",
     "settings-sleepInBackground": "Sleep in background",
     "settings-sleepInBackground-desc": "Enables Chromiums background throttling. This can help save battery life but also breaks notifications.",
     "settings-transparency": "Transparency",

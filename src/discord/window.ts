@@ -335,7 +335,7 @@ export function createWindow() {
         icon: getConfig("customIcon") ?? path.join(import.meta.dirname, "../", "/assets/desktop.png"),
         frame: false,
         backgroundColor: "#202225",
-        autoHideMenuBar: true,
+        autoHideMenuBar: getConfig("autoHideMenuBar"),
         webPreferences: {
             sandbox: true,
             nodeIntegration: false,
@@ -389,7 +389,7 @@ export function createInviteWindow(code: string): void {
         darkTheme: true,
         icon: getConfig("customIcon") ?? path.join(import.meta.dirname, "../", "/assets/desktop.png"),
         frame: true,
-        autoHideMenuBar: true,
+        autoHideMenuBar: getConfig("autoHideMenuBar"),
         webPreferences: {
             sandbox: false,
             spellcheck: getConfig("spellcheck"),

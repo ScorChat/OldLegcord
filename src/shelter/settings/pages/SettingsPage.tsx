@@ -81,6 +81,15 @@ export function SettingsPage() {
                 </Show>
                 <option value="none">{store.i18n["settings-none"]}</option>
             </DropdownItem>
+            <Show when={settings.windowStyle === "native"}>
+                <SwitchItem
+                    note={store.i18n["settings-autoHideMenuBar-desc"]}
+                    value={settings.autoHideMenuBar}
+                    onChange={(e: boolean) => setConfig("autoHideMenuBar", e, true)}
+                >
+                    {store.i18n["settings-autoHideMenuBar"]}
+                </SwitchItem>
+            </Show>
             <DropdownItem
                 value={settings.tray}
                 onChange={(e) => setConfig("tray", (e.target as HTMLInputElement).value as Settings["tray"], true)}
