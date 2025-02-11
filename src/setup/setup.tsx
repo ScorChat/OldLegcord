@@ -338,7 +338,7 @@ export default function Stepper() {
         }
     };
 
-    const handleStateUpdate = (step: keyof typeof stepStates) => (value: string | null) => {
+    const handleStateUpdate = (step: keyof StepStates) => (value: string | null) => {
         setStepStates((prev) => ({
             ...prev,
             [step]: value,
@@ -359,12 +359,10 @@ export default function Stepper() {
                     isValid={steps[currentStep()].isValid}
                     onStateUpdate={
                         currentStep() === 1
-                            ? // @ts-expect-error
-                              handleStateUpdate("windowStyle")
+                            ? handleStateUpdate("windowStyle")
                             : currentStep() === 3
-                              ? // @ts-expect-error
-                                handleStateUpdate("traySettings")
-                              : undefined
+                            ? handleStateUpdate("traySettings")
+                            : undefined
                     }
                 />
 
