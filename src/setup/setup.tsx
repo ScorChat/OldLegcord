@@ -10,8 +10,9 @@ import {
     PuzzleIcon,
     Settings,
     Sparkles,
-} from "lucide-react";
+} from "lucide-solid";
 import { For, createSignal } from "solid-js";
+import { render } from "solid-js/web";
 import { Motion } from "solid-motionone";
 
 interface StepProps {
@@ -357,12 +358,12 @@ export default function Stepper() {
                     onBack={handleBack}
                     isValid={steps[currentStep()].isValid}
                     onStateUpdate={
-                        // @ts-expect-error
                         currentStep() === 1
-                            ? handleStateUpdate("windowStyle")
-                            : // @ts-expect-error
-                              currentStep() === 3
-                              ? handleStateUpdate("traySettings")
+                            ? // @ts-expect-error
+                              handleStateUpdate("windowStyle")
+                            : currentStep() === 3
+                              ? // @ts-expect-error
+                                handleStateUpdate("traySettings")
                               : undefined
                     }
                 />
@@ -398,4 +399,11 @@ export default function Stepper() {
             </Motion.div>
         </div>
     );
+}
+
+const rootElement = document.getElementById("root");
+if (rootElement) {
+    render(Stepper, rootElement);
+} else {
+    console.error("Root element not found");
 }

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { platform } from "node:os";
 import path from "node:path";
 import { BrowserWindow, app, ipcMain } from "electron";
 import type { Settings } from "../@types/settings.js";
@@ -7,11 +8,11 @@ import { getLang } from "../common/lang.js";
 
 let setupWindow: BrowserWindow;
 export async function createSetupWindow(): Promise<void> {
-    import("./tray.js");
+    if (platform() !== "darwin") import("./tray.js");
     return new Promise((resolve) => {
         setupWindow = new BrowserWindow({
-            width: 390,
-            height: 470,
+            width: 800,
+            height: 600,
             title: "Legcord Setup",
             darkTheme: true,
             icon: getConfig("customIcon") ?? path.join(import.meta.dirname, "../", "/assets/desktop.png"),
@@ -55,6 +56,6 @@ export async function createSetupWindow(): Promise<void> {
             app.relaunch();
             app.exit();
         });
-        void setupWindow.loadURL(`file://${import.meta.dirname}/html/setup.html`);
+        void setupWindow.loadFile(path.join(import.meta.dirname, "/html/newSetup.html"));
     });
 }
