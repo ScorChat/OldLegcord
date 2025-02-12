@@ -145,7 +145,7 @@ const TraySettings = ({ readyToNext }: { readyToNext: (valid: boolean) => void }
                 <h2 class="text-2xl font-bold text-white mb-2">System Tray</h2>
                 <p class="text-gray-400">Choose whether to enable the system tray icon</p>
             </div>
-            <Show when={window.setup.getOS === "linux"}>
+            <Show when={window.setup.os === "linux"}>
                 <div class="space-y-4">
                     <div class="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-3">
                         <CircleAlert class="w-5 h-5 text-yellow-400 flex-shrink-0" />

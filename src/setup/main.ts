@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import { platform } from "node:os";
 import path from "node:path";
-import { BrowserWindow, app, ipcMain } from "electron";
+import { BrowserWindow, type BrowserWindowConstructorOptions, app, ipcMain } from "electron";
 import type { Settings } from "../@types/settings.js";
 import { getConfig, getConfigLocation, setConfigBulk } from "../common/config.js";
 import { getLang } from "../common/lang.js";
@@ -10,24 +10,14 @@ let setupWindow: BrowserWindow;
 export async function createSetupWindow(): Promise<void> {
     if (platform() !== "darwin") import("./tray.js");
     return new Promise(() => {
-        setupWindow = new BrowserWindow({
+        const windowOptions: BrowserWindowConstructorOptions = {
             width: 800,
             height: 600,
             title: "Legcord Setup",
             darkTheme: true,
             icon: getConfig("customIcon") ?? path.join(import.meta.dirname, "../", "/assets/desktop.png"),
-            trafficLightPosition: {
-                x: 13,
-                y: 10,
-            },
-            titleBarStyle: "hidden",
-            titleBarOverlay: {
-                color: "#2c2f33",
-                symbolColor: "#99aab5",
-                height: 30,
-            },
             resizable: false,
-            vibrancy: "fullscreen-ui",
+            frame: true,
             maximizable: false,
             autoHideMenuBar: true,
             webPreferences: {
@@ -35,7 +25,22 @@ export async function createSetupWindow(): Promise<void> {
                 spellcheck: false,
                 preload: path.join(import.meta.dirname, "setup", "preload.mjs"),
             },
-        });
+        };
+        if (platform() === "darwin") {
+            windowOptions.titleBarStyle = "hidden";
+            windowOptions.titleBarOverlay = {
+                color: "#2c2f33",
+                symbolColor: "#99aab5",
+                height: 30,
+            };
+            windowOptions.trafficLightPosition = {
+                x: 13,
+                y: 10,
+            };
+            windowOptions.frame = false;
+            windowOptions.vibrancy = "fullscreen-ui";
+        }
+        setupWindow = new BrowserWindow(windowOptions);
         ipcMain.on("setup-minimize", () => {
             setupWindow.minimize();
         });
