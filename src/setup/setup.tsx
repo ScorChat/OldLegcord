@@ -41,6 +41,7 @@ const WindowStyle = ({ readyToNext }: { readyToNext: (valid: boolean) => void })
             readyToNext(false);
         } else {
             readyToNext(true);
+            window.setup.saveSettings({ windowStyle: newValue });
         }
     };
 
@@ -49,13 +50,13 @@ const WindowStyle = ({ readyToNext }: { readyToNext: (valid: boolean) => void })
             id: "native",
             title: "Native Window",
             description: "Use your system's default window decorations",
-            screenshot: "https://placehold.co/600x400",
+            screenshot: "legcord://assets/native.png",
         },
         {
-            id: "custom",
+            id: "default",
             title: "Custom Titlebar",
             description: "Use Legcord's custom titlebar design",
-            screenshot: "https://placehold.co/600x400",
+            screenshot: "legcord://assets/custom.png",
         },
     ];
 
@@ -118,18 +119,19 @@ const TraySettings = ({ readyToNext }: { readyToNext: (valid: boolean) => void }
             readyToNext(false);
         } else {
             readyToNext(true);
+            window.setup.saveSettings({ tray: newValue });
         }
     };
 
     const options = [
         {
-            id: "enable",
+            id: "dynamic",
             title: "Enable Tray Icon",
             description: "Show Legcord in your system tray",
             icon: LaptopMinimalCheck,
         },
         {
-            id: "disable",
+            id: "disabled",
             title: "Disable Tray Icon",
             description: "Don't show Legcord in your system tray",
             icon: LaptopMinimal,
@@ -143,53 +145,53 @@ const TraySettings = ({ readyToNext }: { readyToNext: (valid: boolean) => void }
                 <h2 class="text-2xl font-bold text-white mb-2">System Tray</h2>
                 <p class="text-gray-400">Choose whether to enable the system tray icon</p>
             </div>
-
-            <div class="space-y-4">
-                <div class="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-3">
-                    <CircleAlert class="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                    <div>
-                        <p class="text-yellow-200/80 text-sm mt-0.5">
-                            System tray functionality may have issues or behave differently on Linux systems.
-                        </p>
+            <Show when={window.setup.getOS === "linux"}>
+                <div class="space-y-4">
+                    <div class="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center gap-3">
+                        <CircleAlert class="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                        <div>
+                            <p class="text-yellow-200/80 text-sm mt-0.5">
+                                System tray functionality may have issues or behave differently on Linux systems.
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <For each={options}>
-                    {(option) => (
-                        <Motion.button
-                            onClick={() => handleOptionSelect(option.id)}
-                            class={`group relative w-full p-4 rounded-xl transition-all duration-300 text-left ${
-                                selectedOption() === option.id
-                                    ? "bg-purple-900/40 border border-purple-500/50 shadow-lg shadow-purple-500/20"
-                                    : "bg-gray-800/40 border border-gray-700/30 hover:bg-gray-800/60"
-                            }`}
-                        >
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class={`w-10 h-10 rounded-lg transition-colors flex items-center justify-center ${
-                                        selectedOption() === option.id ? "bg-purple-500/20" : "bg-gray-800/40"
-                                    }`}
-                                >
-                                    <option.icon class="w-6 h-6 text-purple-400" />
-                                </div>
-                                <div class="flex-1">
-                                    <h3 class="text-lg font-semibold text-white">{option.title}</h3>
-                                    <p class="text-gray-400 text-sm mt-1">{option.description}</p>
-                                </div>
-                                <div
-                                    class={`w-5 h-5 rounded-full border-2 transition-colors ${
-                                        selectedOption() === option.id ? "border-purple-400" : "border-gray-600"
-                                    }`}
-                                >
-                                    {selectedOption() === option.id && (
-                                        <div class="w-3 h-3 m-0.5 rounded-full bg-purple-400" />
-                                    )}
-                                </div>
+            </Show>
+            <For each={options}>
+                {(option) => (
+                    <Motion.button
+                        onClick={() => handleOptionSelect(option.id)}
+                        class={`group relative w-full p-4 rounded-xl transition-all duration-300 text-left ${
+                            selectedOption() === option.id
+                                ? "bg-purple-900/40 border border-purple-500/50 shadow-lg shadow-purple-500/20"
+                                : "bg-gray-800/40 border border-gray-700/30 hover:bg-gray-800/60"
+                        }`}
+                    >
+                        <div class="flex items-start gap-4">
+                            <div
+                                class={`w-10 h-10 rounded-lg transition-colors flex items-center justify-center ${
+                                    selectedOption() === option.id ? "bg-purple-500/20" : "bg-gray-800/40"
+                                }`}
+                            >
+                                <option.icon class="w-6 h-6 text-purple-400" />
                             </div>
-                        </Motion.button>
-                    )}
-                </For>
-            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-white">{option.title}</h3>
+                                <p class="text-gray-400 text-sm mt-1">{option.description}</p>
+                            </div>
+                            <div
+                                class={`w-5 h-5 rounded-full border-2 transition-colors ${
+                                    selectedOption() === option.id ? "border-purple-400" : "border-gray-600"
+                                }`}
+                            >
+                                {selectedOption() === option.id && (
+                                    <div class="w-3 h-3 m-0.5 rounded-full bg-purple-400" />
+                                )}
+                            </div>
+                        </div>
+                    </Motion.button>
+                )}
+            </For>
         </div>
     );
 };
@@ -223,6 +225,11 @@ const ModSelector = ({ readyToNext }: { readyToNext: (valid: boolean) => void })
             readyToNext(false);
         } else {
             readyToNext(true);
+            if (newValue !== "shelter") {
+                window.setup.saveSettings({ mods: [newValue] });
+            } else {
+                window.setup.saveSettings({ mods: [] });
+            }
         }
     };
     const mods = [
@@ -230,13 +237,13 @@ const ModSelector = ({ readyToNext }: { readyToNext: (valid: boolean) => void })
             id: "vencord",
             title: "Vencord",
             description: "Client mod with plugins and themes.",
-            icon: "/vencord.png",
+            icon: "legcord://assets/vencord.png",
         },
         {
             id: "equicord",
             title: "Equicord",
             description: "A fork of Vencord with more plugins.",
-            icon: "/equicord.png",
+            icon: "legcord://assets/equicord.png",
         },
     ];
 
@@ -307,7 +314,7 @@ const ModSelector = ({ readyToNext }: { readyToNext: (valid: boolean) => void })
     );
 };
 
-export default function Stepper() {
+function Stepper() {
     const [currentStep, setCurrentStep] = createSignal(0);
     const [isValid, setValid] = createSignal(true);
     const maxSteps = 5;
@@ -318,12 +325,17 @@ export default function Stepper() {
     };
     const handleBack = () => {
         setCurrentStep((prev) => prev - 1);
+        if (currentStep() === 0) {
+            setValid(true);
+        }
     };
     const setReady = (valid: boolean) => {
         setValid(valid);
     };
     const restart = () => {
         console.log("Restarting...");
+        window.setup.saveSettings({ doneSetup: true });
+        window.setup.restart();
     };
     return (
         <div class="min-h-screen flex items-center justify-center">

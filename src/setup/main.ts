@@ -9,7 +9,7 @@ import { getLang } from "../common/lang.js";
 let setupWindow: BrowserWindow;
 export async function createSetupWindow(): Promise<void> {
     if (platform() !== "darwin") import("./tray.js");
-    return new Promise((resolve) => {
+    return new Promise(() => {
         setupWindow = new BrowserWindow({
             width: 800,
             height: 600,
@@ -35,11 +35,6 @@ export async function createSetupWindow(): Promise<void> {
                 spellcheck: false,
                 preload: path.join(import.meta.dirname, "setup", "preload.mjs"),
             },
-        });
-        ipcMain.on("saveSettings", (_event, args: Settings) => {
-            console.log(args);
-            setConfigBulk(args);
-            resolve();
         });
         ipcMain.on("setup-minimize", () => {
             setupWindow.minimize();

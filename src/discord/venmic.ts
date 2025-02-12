@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { join } from "node:path";
 import type { LinkData, Node, PatchBay as PatchBayType } from "@vencord/venmic";
 import { app, ipcMain } from "electron";
