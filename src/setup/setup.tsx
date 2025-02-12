@@ -11,17 +11,9 @@ import {
     Settings,
     Sparkles,
 } from "lucide-solid";
-import { For, createSignal } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 import { render } from "solid-js/web";
 import { Motion } from "solid-motionone";
-
-interface StepProps {
-    currentStep: number;
-    onNext: () => void;
-    onBack: () => void;
-    isValid?: boolean;
-    onStateUpdate?: ((value: string | null) => void) | undefined;
-}
 
 const Welcome = ({ onNext }: { onNext: () => void }) => (
     <Motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} class="text-center">
@@ -39,13 +31,17 @@ const Welcome = ({ onNext }: { onNext: () => void }) => (
     </Motion.div>
 );
 
-const WindowStyle = ({ onNext, onBack, isValid, onStateUpdate }: StepProps) => {
+const WindowStyle = ({ readyToNext }: { readyToNext: (valid: boolean) => void }) => {
     const [selectedStyle, setSelectedStyle] = createSignal<string | null>(null);
 
     const handleStyleSelect = (styleId: string) => {
         const newValue = selectedStyle() === styleId ? null : styleId;
         setSelectedStyle(newValue);
-        onStateUpdate?.(newValue);
+        if (newValue === null) {
+            readyToNext(false);
+        } else {
+            readyToNext(true);
+        }
     };
 
     const styles = [
@@ -112,13 +108,17 @@ const WindowStyle = ({ onNext, onBack, isValid, onStateUpdate }: StepProps) => {
     );
 };
 
-const TraySettings = ({ onNext, onBack, isValid, onStateUpdate }: StepProps) => {
+const TraySettings = ({ readyToNext }: { readyToNext: (valid: boolean) => void }) => {
     const [selectedOption, setSelectedOption] = createSignal<string | null>(null);
 
     const handleOptionSelect = (optionId: string) => {
         const newValue = selectedOption() === optionId ? null : optionId;
         setSelectedOption(newValue);
-        onStateUpdate?.(newValue);
+        if (newValue === null) {
+            readyToNext(false);
+        } else {
+            readyToNext(true);
+        }
     };
 
     const options = [
@@ -194,7 +194,7 @@ const TraySettings = ({ onNext, onBack, isValid, onStateUpdate }: StepProps) => 
     );
 };
 
-const Finish = ({ onNext, onBack }: StepProps) => (
+const Finish = ({ restart }: { restart: () => void }) => (
     <div class="text-center">
         <Box class="w-8 h-8 text-purple-400 mx-auto mb-4" />
         <h2 class="text-2xl font-bold text-white mb-4">You're All Set!</h2>
@@ -206,7 +206,7 @@ const Finish = ({ onNext, onBack }: StepProps) => (
             </p>
         </div>
         <Motion.button
-            onClick={onNext}
+            onClick={restart}
             class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium"
         >
             Launch Legcord
@@ -214,9 +214,17 @@ const Finish = ({ onNext, onBack }: StepProps) => (
     </div>
 );
 
-const ModSelector = ({ onNext, onBack, isValid }: StepProps) => {
+const ModSelector = ({ readyToNext }: { readyToNext: (valid: boolean) => void }) => {
     const [selectedMod, setSelectedMod] = createSignal<string | null>(null);
-
+    const handleModSelect = (optionId: string) => {
+        const newValue = selectedMod() === optionId ? null : optionId;
+        setSelectedMod(newValue);
+        if (newValue === null) {
+            readyToNext(false);
+        } else {
+            readyToNext(true);
+        }
+    };
     const mods = [
         {
             id: "vencord",
@@ -246,7 +254,7 @@ const ModSelector = ({ onNext, onBack, isValid }: StepProps) => {
                 <For each={mods} fallback={<div>Loading...</div>}>
                     {(mod) => (
                         <Motion.button
-                            onClick={() => setSelectedMod(selectedMod() === mod.id ? null : mod.id)}
+                            onClick={() => handleModSelect(mod.id)}
                             class={`group relative w-full p-4 rounded-xl transition-all duration-300 text-left ${
                                 selectedMod() === mod.id
                                     ? "bg-purple-900/40 border border-purple-500/50 shadow-lg shadow-purple-500/20"
@@ -285,10 +293,10 @@ const ModSelector = ({ onNext, onBack, isValid }: StepProps) => {
             </div>
 
             <Motion.button
-                onClick={onNext}
+                onClick={() => handleModSelect("shelter")}
                 class={`w-full px-6 py-2.5 rounded-xl border transition-colors font-medium
           ${
-              selectedMod() === null
+              selectedMod() === "shelter"
                   ? "border-purple-500/50 text-purple-400 hover:bg-purple-500/10"
                   : "border-gray-700/30 text-gray-500 hover:border-purple-500/50 hover:text-purple-400 hover:bg-purple-500/10"
           }`}
@@ -299,52 +307,24 @@ const ModSelector = ({ onNext, onBack, isValid }: StepProps) => {
     );
 };
 
-interface StepStates {
-    windowStyle: string | null;
-    modSelector: string | null;
-    traySettings: string | null;
-}
-
 export default function Stepper() {
     const [currentStep, setCurrentStep] = createSignal(0);
-
-    const [stepStates, setStepStates] = createSignal<StepStates>({
-        windowStyle: null,
-        modSelector: null,
-        traySettings: null,
-    });
-
-    const steps = [
-        { component: Welcome, label: "Welcome", isValid: true },
-        { component: WindowStyle, label: "Window Style", isValid: stepStates().windowStyle !== null },
-        { component: ModSelector, label: "Client Mods", isValid: true }, // Always valid bc Shelter is default
-        { component: TraySettings, label: "Tray Settings", isValid: stepStates().traySettings !== null },
-        { component: Finish, label: "Finish", isValid: true },
-    ];
-
-    const CurrentStepComponent = steps[currentStep()].component;
-    const isLastStep = currentStep() === steps.length - 1;
-    const isFirstStep = currentStep() === 0;
-
+    const [isValid, setValid] = createSignal(true);
+    const maxSteps = 5;
     const handleNext = () => {
-        if (currentStep() < steps.length - 1 && steps[currentStep()].isValid) {
-            setCurrentStep((prev) => prev + 1);
-        }
+        if (!isValid()) return;
+        setCurrentStep((prev) => prev + 1);
+        setValid(false);
     };
-
     const handleBack = () => {
-        if (currentStep() > 0) {
-            setCurrentStep((prev) => prev - 1);
-        }
+        setCurrentStep((prev) => prev - 1);
     };
-
-    const handleStateUpdate = (step: keyof StepStates) => (value: string | null) => {
-        setStepStates((prev) => ({
-            ...prev,
-            [step]: value,
-        }));
+    const setReady = (valid: boolean) => {
+        setValid(valid);
     };
-
+    const restart = () => {
+        console.log("Restarting...");
+    };
     return (
         <div class="min-h-screen flex items-center justify-center">
             <Motion.div
@@ -352,21 +332,23 @@ export default function Stepper() {
                 animate={{ opacity: 1, y: 0 }}
                 class="w-full max-w-md p-8 rounded-3xl bg-gradient-to-br from-[#171631] via-gray-900 to-[#171631] backdrop-blur-xl border border-gray-800/50 shadow-2xl"
             >
-                <CurrentStepComponent
-                    currentStep={currentStep()}
-                    onNext={handleNext}
-                    onBack={handleBack}
-                    isValid={steps[currentStep()].isValid}
-                    onStateUpdate={
-                        currentStep() === 1
-                            ? handleStateUpdate("windowStyle")
-                            : currentStep() === 3
-                            ? handleStateUpdate("traySettings")
-                            : undefined
-                    }
-                />
+                <Show when={currentStep() === 0}>
+                    <Welcome onNext={handleNext} />
+                </Show>
+                <Show when={currentStep() === 1}>
+                    <WindowStyle readyToNext={setReady} />
+                </Show>
+                <Show when={currentStep() === 2}>
+                    <ModSelector readyToNext={setReady} />
+                </Show>
+                <Show when={currentStep() === 3}>
+                    <TraySettings readyToNext={setReady} />
+                </Show>
+                <Show when={currentStep() === 4}>
+                    <Finish restart={restart} />
+                </Show>
 
-                {!isFirstStep && !isLastStep && (
+                <Show when={currentStep() !== 0 && currentStep() !== 4}>
                     <div class="mt-8 flex items-center justify-between">
                         <Motion.button
                             onClick={handleBack}
@@ -377,14 +359,13 @@ export default function Stepper() {
                         </Motion.button>
 
                         <div class="px-4 py-1 rounded-full bg-gray-800/50 text-gray-400 font-medium text-sm">
-                            Step {currentStep() + 1} of {steps.length}
+                            Step {currentStep() + 1} of {maxSteps}
                         </div>
 
                         <Motion.button
                             onClick={handleNext}
-                            disabled={!steps[currentStep()].isValid}
                             class={`px-6 py-2.5 rounded-xl text-white font-medium transition-colors inline-flex items-center gap-2 ${
-                                steps[currentStep()].isValid
+                                isValid()
                                     ? "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500"
                                     : "bg-gray-700 cursor-not-allowed opacity-50"
                             }`}
@@ -393,7 +374,7 @@ export default function Stepper() {
                             <ChevronRight class="w-4 h-4" />
                         </Motion.button>
                     </div>
-                )}
+                </Show>
             </Motion.div>
         </div>
     );

@@ -16,12 +16,22 @@ export async function createSetupWindow(): Promise<void> {
             title: "Legcord Setup",
             darkTheme: true,
             icon: getConfig("customIcon") ?? path.join(import.meta.dirname, "../", "/assets/desktop.png"),
-            frame: true,
+            trafficLightPosition: {
+                x: 13,
+                y: 10,
+            },
+            titleBarStyle: "hidden",
+            titleBarOverlay: {
+                color: "#2c2f33",
+                symbolColor: "#99aab5",
+                height: 30,
+            },
             resizable: false,
+            vibrancy: "fullscreen-ui",
             maximizable: false,
             autoHideMenuBar: true,
             webPreferences: {
-                sandbox: false,
+                sandbox: true,
                 spellcheck: false,
                 preload: path.join(import.meta.dirname, "setup", "preload.mjs"),
             },
@@ -56,6 +66,6 @@ export async function createSetupWindow(): Promise<void> {
             app.relaunch();
             app.exit();
         });
-        void setupWindow.loadFile(path.join(import.meta.dirname, "/html/newSetup.html"));
+        void setupWindow.loadFile(path.join(import.meta.dirname, "/html/setup.html"));
     });
 }

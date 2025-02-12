@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from "electron";
+const { contextBridge, ipcRenderer } = require("electron");
 import type { Settings } from "../@types/settings.js";
 
 contextBridge.exposeInMainWorld("legcordinternal", {
