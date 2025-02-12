@@ -8,7 +8,10 @@ const requiredPlugins: Record<string, [string, { isVisible: boolean; allowedActi
     "legcord-screenshare": ["legcord://plugins/screenshare/", { isVisible: false, allowedActions: {} }],
 };
 if (process.platform === "darwin") {
-    requiredPlugins["legcord-touchbar"] = ["legcord://plugins/touchbar/", { isVisible: true, allowedActions: { toggle: true } }];
+    requiredPlugins["legcord-touchbar"] = [
+        "legcord://plugins/touchbar/",
+        { isVisible: true, allowedActions: { toggle: true } },
+    ];
 }
 async function inject() {
     try {
