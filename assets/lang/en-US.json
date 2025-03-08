@@ -23,7 +23,7 @@
     "settings-transparency": "Transparency",
     "settings-transparency-desc": "Set the transparency mode Legcord uses.",
     "settings-transparency-universal": "Universal",
-    "settings-transparency-modern": "Modern (Windows 11 only)",
+    "settings-transparency-modern": "Modern",
     "settings-theme-transparent": "Transparent",
     "settings-popoutPiP": "Call Popout Always on Top",
     "settings-popoutPiP-desc": "When enabled, the call popout will be in Always on Top mode.",

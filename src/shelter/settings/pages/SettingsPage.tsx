@@ -76,7 +76,7 @@ export function SettingsPage() {
                 link="https://github.com/Legcord/Legcord/wiki/Transparency-options"
             >
                 <option value="universal">{store.i18n["settings-transparency-universal"]}</option>
-                <Show when={window.legcord.platform === "win32"}>
+                <Show when={window.legcord.platform === "win32" || window.legcord.platform === "darwin"}>
                     <option value="modern">{store.i18n["settings-transparency-modern"]}</option>
                 </Show>
                 <option value="none">{store.i18n["settings-none"]}</option>

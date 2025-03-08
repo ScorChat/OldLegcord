@@ -368,10 +368,16 @@ export function createWindow() {
             browserWindowOptions.transparent = true;
             break;
         case "modern":
-            browserWindowOptions.backgroundColor = "#00000000";
-            browserWindowOptions.transparent = false;
-            browserWindowOptions.frame = true;
-            browserWindowOptions.backgroundMaterial = "acrylic";
+            if (os.platform() === "win32") {
+                browserWindowOptions.backgroundColor = "#00000000";
+                browserWindowOptions.transparent = false;
+                browserWindowOptions.frame = true;
+                browserWindowOptions.backgroundMaterial = "acrylic";
+            } else if (os.platform() === "darwin") {
+                browserWindowOptions.backgroundColor = "#00000000";
+                browserWindowOptions.vibrancy = "fullscreen-ui";
+                browserWindowOptions.transparent = true;
+            }
             break;
         case "none":
             break;
