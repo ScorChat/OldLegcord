@@ -65,6 +65,9 @@ export function SettingsPage() {
                 <Show when={window.legcord.platform === "win32" || "darwin"}>
                     <option value="overlay">{store.i18n["settings-theme-overlay"]}</option>
                 </Show>
+                <Show when={window.legcord.platform === "win32" || "darwin"}>
+                    <option value="rebrand">Rebrand</option>
+                </Show>
             </DropdownItem>
             <DropdownItem
                 value={store.settings.transparency}

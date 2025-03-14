@@ -364,6 +364,18 @@ export function createWindow() {
                 y: 10,
             };
             break;
+        case "rebrand":
+            browserWindowOptions.titleBarStyle = "hidden";
+            browserWindowOptions.titleBarOverlay = {
+                color: "#28282D",
+                symbolColor: "#99aab5",
+                height: 36,
+            };
+            browserWindowOptions.trafficLightPosition = {
+                x: 10,
+                y: 10,
+            };
+            break;
     }
     switch (getConfig("transparency")) {
         case "universal":
