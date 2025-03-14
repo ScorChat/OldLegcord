@@ -132,6 +132,8 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     if (getConfig("disableHttpCache")) app.commandLine.appendSwitch("disable-http-cache");
 
     void app.whenReady().then(async () => {
+        process.on("SIGINT", () => app.quit());
+        process.on("SIGTERM", () => app.quit());
         // Patch for linux bug to ensure things are loaded before window creation (fixes transparency on some linux systems)
         await new Promise<void>((resolve) =>
             setTimeout(() => {
