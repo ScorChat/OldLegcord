@@ -7,6 +7,7 @@ export let firstRun: boolean;
 const defaults: Settings = {
     windowStyle: "default",
     channel: "stable",
+    bounceOnPing: false,
     legcordCSP: true,
     minimizeToTray: true,
     keybinds: [],

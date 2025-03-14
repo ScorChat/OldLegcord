@@ -90,6 +90,15 @@ export function SettingsPage() {
                     {store.i18n["settings-autoHideMenuBar"]}
                 </SwitchItem>
             </Show>
+            <Show when={window.legcord.platform === "darwin"}>
+                <SwitchItem
+                    note={store.i18n["settings-bounceOnPing-desc"]}
+                    value={settings.bounceOnPing}
+                    onChange={(e: boolean) => setConfig("bounceOnPing", e, true)}
+                >
+                    {store.i18n["settings-bounceOnPing"]}
+                </SwitchItem>
+            </Show>
             <DropdownItem
                 value={settings.tray}
                 onChange={(e) => setConfig("tray", (e.target as HTMLInputElement).value as Settings["tray"], true)}

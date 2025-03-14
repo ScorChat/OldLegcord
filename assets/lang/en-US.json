@@ -11,6 +11,8 @@
     "next": "Next",
     "setup_question4": "Select a client mod you want to install:",
     "setup_question5": "Do you want to use a tray icon?",
+    "settings-bounceOnPing": "Bounce in dock on ping",
+    "settings-bounceOnPing-desc": "Bounce the app in the dock when you receive a ping.",
     "settings-theme": "Window style",
     "settings-theme-desc": "Window style manages what titlebar Legcord uses.",
     "settings-theme-default": "Default (Custom)",

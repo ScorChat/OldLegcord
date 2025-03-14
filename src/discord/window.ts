@@ -237,7 +237,10 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         }
         if (process.platform === "darwin") {
             if (title.startsWith("•")) return app.dock.setBadge("•");
-            if (title.startsWith("(")) return app.setBadgeCount(Number.parseInt(/\((\d+)\)/.exec(title)![1]));
+            if (title.startsWith("(")) {
+                if (getConfig("bounceOnPing")) app.dock.bounce();
+                return app.setBadgeCount(Number.parseInt(/\((\d+)\)/.exec(title)![1]));
+            }
             app.setBadgeCount(0);
         }
         if (!title.endsWith(legcordSuffix)) {
