@@ -121,6 +121,7 @@ export const ScreensharePicker = (props: {
                                 <option value="720">720p</option>
                                 <option value="1080">1080p</option>
                                 <option value="1440">1440p</option>
+                                <option value="2160">2160p</option>
                             </Dropdown>
                         </div>
                         <div>
