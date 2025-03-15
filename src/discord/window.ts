@@ -289,28 +289,28 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         void passedWindow.webContents.executeJavaScript(`document.body.removeAttribute("isMaximized");`);
     });
     if (getConfig("inviteWebsocket") && mainWindows.length === 1) {
-        const child = utilityProcess.fork(path.join(import.meta.dirname, 'rpc.js'))
+        const child = utilityProcess.fork(path.join(import.meta.dirname, "rpc.js"));
 
-        child.on('spawn', () => {
-            console.log("arRPC process started")
-            console.log(child.pid)
-        })
+        child.on("spawn", () => {
+            console.log("arRPC process started");
+            console.log(child.pid);
+        });
 
-        child.on('message', (message) => {
-            const json = JSON.parse(message)
+        child.on("message", (message) => {
+            const json = JSON.parse(message);
             if (json.type === "invite") {
                 createInviteWindow(json.code);
             } else if (json.type === "activity") {
-                console.log("activity pulse")
-                console.log(json.data)
+                console.log("activity pulse");
+                console.log(json.data);
                 passedWindow.webContents.send("rpc", json.data);
             }
-        })
+        });
 
-        child.on('exit', () => {
-            console.log("arRPC process exited")
-            console.log(child.pid)
-        })
+        child.on("exit", () => {
+            console.log("arRPC process exited");
+            console.log(child.pid);
+        });
     }
     if (firstRun) {
         passedWindow.close();

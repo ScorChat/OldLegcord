@@ -7,11 +7,11 @@ const RPC = new RPCServer();
 
 RPC.on("activity", (data: string) => {
     console.log(data);
-    const response = {type: "activity", data: data};
+    const response = { type: "activity", data: data };
     process.parentPort.postMessage(JSON.stringify(response));
 });
 RPC.on("invite", (code: string) => {
     console.log(code);
-    const response = {type: "invite", code: code};
+    const response = { type: "invite", code: code };
     process.parentPort.postMessage(JSON.stringify(response));
 });

@@ -58,17 +58,8 @@ export default defineConfig([
             format: "esm",
             sourcemap: true,
         },
-        external: [
-            ...electronExternals,
-            "arrpc",
-        ],
-        plugins: [
-            commonjs(),
-            esmShim(),
-            json(),
-            minify({ minify: prodEnv }),
-            typescript(),
-        ],
+        external: [...electronExternals, "arrpc"],
+        plugins: [commonjs(), esmShim(), json(), minify({ minify: prodEnv }), typescript()],
     },
     {
         input: "src/discord/preload/preload.mts",
