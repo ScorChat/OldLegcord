@@ -1,11 +1,6 @@
 import { readFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import RPCServer from "arrpc";
-// To allow seamless switching between custom titlebar and native os titlebar,
-// I had to add most of the window creation code here to split both into separate functions
-// WHY? Because I can't use the same code for both due to annoying bug with value `frame` not responding to variables
-// I'm sorry for this mess but I'm not sure how to fix it.
 import {
     BrowserWindow,
     type BrowserWindowConstructorOptions,
@@ -14,6 +9,7 @@ import {
     dialog,
     nativeImage,
     shell,
+    utilityProcess,
 } from "electron";
 import contextMenu from "electron-context-menu";
 import { firstRun, getConfig, setConfig } from "../common/config.js";
@@ -293,13 +289,28 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         void passedWindow.webContents.executeJavaScript(`document.body.removeAttribute("isMaximized");`);
     });
     if (getConfig("inviteWebsocket") && mainWindows.length === 1) {
-        const RPC = new RPCServer();
+        const child = utilityProcess.fork(path.join(import.meta.dirname, 'rpc.js'))
 
-        RPC.on("activity", (data: string) => passedWindow.webContents.send("rpc", data));
-        RPC.on("invite", (code: string) => {
-            console.log(code);
-            createInviteWindow(code);
-        });
+        child.on('spawn', () => {
+            console.log("arRPC process started")
+            console.log(child.pid)
+        })
+
+        child.on('message', (message) => {
+            const json = JSON.parse(message)
+            if (json.type === "invite") {
+                createInviteWindow(json.code);
+            } else if (json.type === "activity") {
+                console.log("activity pulse")
+                console.log(json.data)
+                passedWindow.webContents.send("rpc", json.data);
+            }
+        })
+
+        child.on('exit', () => {
+            console.log("arRPC process exited")
+            console.log(child.pid)
+        })
     }
     if (firstRun) {
         passedWindow.close();

@@ -52,6 +52,25 @@ export default defineConfig([
         ],
     },
     {
+        input: "src/rpc.ts",
+        output: {
+            dir: "ts-out",
+            format: "esm",
+            sourcemap: true,
+        },
+        external: [
+            ...electronExternals,
+            "arrpc",
+        ],
+        plugins: [
+            commonjs(),
+            esmShim(),
+            json(),
+            minify({ minify: prodEnv }),
+            typescript(),
+        ],
+    },
+    {
         input: "src/discord/preload/preload.mts",
         output: {
             dir: "ts-out/discord",
