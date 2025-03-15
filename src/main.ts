@@ -73,6 +73,7 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     if (process.platform === "linux") {
         app.commandLine.appendSwitch("enable-features", "PulseaudioLoopbackForScreenShare");
         app.commandLine.appendSwitch("disable-features", "WebRtcAllowInputVolumeAdjustment");
+        app.commandLine.appendSwitch("enable-speech-dispatcher");
     }
     // enable webrtc capturer for wayland
     if (process.platform === "linux" && process.env.XDG_SESSION_TYPE?.toLowerCase() === "wayland") {
