@@ -16,6 +16,7 @@
         "packageQuick": "pnpm run build && electron-builder --dir",
         "lint": "biome check",
         "lint:fix": "biome check --write",
+        "postinstall": "electron-builder install-app-deps",
         "CIbuild": "pnpm run build && electron-builder --linux zip && electron-builder --windows zip && electron-builder --macos zip"
     },
     "repository": {
@@ -43,7 +44,7 @@
         "@uwu/lune": "^1.5.1",
         "@uwu/shelter-defs": "^1.4.1",
         "babel-preset-solid": "^1.9.3",
-        "electron": "35.0.1",
+        "electron": "35.0.2",
         "electron-builder": "^26.0.11",
         "lucide-solid": "^0.475.0",
         "rollup": "^4.27.4",
@@ -58,7 +59,7 @@
         "arrpc": "https://github.com/Legcord/arrpc.git",
         "electron-context-menu": "^4.0.4",
         "electron-is-dev": "^3.0.1",
-        "electron-updater": "^6.3.9",
+        "electron-updater": "^6.6.2",
         "ws": "^8.18.0"
     },
     "optionalDependencies": {
