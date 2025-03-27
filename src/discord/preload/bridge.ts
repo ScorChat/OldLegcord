@@ -88,7 +88,6 @@ contextBridge.exposeInMainWorld("legcord", {
 
 let windowCallback: (arg0: object) => void;
 contextBridge.exposeInMainWorld("LegcordRPC", {
-    // REVIEW - I don't think this is right
     listen: (callback: () => void) => {
         windowCallback = callback;
     },
