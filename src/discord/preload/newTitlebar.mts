@@ -3,7 +3,7 @@ import { addStyle } from "../../common/dom.js";
 import { sleep } from "../../common/sleep.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (ipcRenderer.sendSync("getConfig", "windowStyle") === "rebrand") return;
+    if (ipcRenderer.sendSync("getConfig", "windowStyle") !== "rebrand") return;
     sleep(500);
     switch (ipcRenderer.sendSync("getOS")) {
         case "darwin":
