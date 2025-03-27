@@ -10,16 +10,16 @@
     color: var(--text-muted);
 }
 
-[data-list-item-id="guildsnav___app-download-button"] {
+div:has(:has(:has([data-list-item-id="guildsnav___app-download-button"]))) {
     display: none !important;
 }
 
 /* custom keybinds are not supported on web information */
-.container_be45f6.info_be45f6.browserNotice_f916fc {
+.container__6436f.info__6436f.browserNotice__740f2 {
     visibility: hidden;
     display: block !important;
 }
-.container_be45f6.info_be45f6.browserNotice_f916fc:after {
+.container__6436f.info__6436f.browserNotice__740f2:after {
     content: "You can modify global keybinds using the keybind maker on the left sidebar";
     visibility: visible;
 }

@@ -52,11 +52,6 @@ async function load() {
         });
         })();
         `);
-
-        // remove the annoying "download the app" button
-        addScript(
-            "document.querySelector('.guilds_a4d4d9 .scroller_fea3ef').lastChild.previousSibling.style.display = 'none';",
-        );
         addScript(`
         shelter.plugins.removePlugin("armcord-settings")
         shelter.plugins.removePlugin("armcord-screenshare")

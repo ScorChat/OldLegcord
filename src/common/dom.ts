@@ -15,7 +15,7 @@ export function addTheme(id: string, styleString: string): void {
 
 export function addScript(scriptString: string): void {
     const script = document.createElement("script");
-    script.src = scriptString;
+    script.appendChild(document.createTextNode(scriptString));
     document.body.append(script);
 }
 
