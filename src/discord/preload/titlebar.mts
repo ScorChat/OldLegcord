@@ -25,9 +25,6 @@ function injectTitlebar(isOverlay?: boolean): void {
         }
         document.body.prepend(elem);
         addStyle("legcord://assets/css/titlebar.css");
-        document.body.setAttribute("customTitlebar", "");
-
-        document.body.setAttribute("legcord-platform", ipcRenderer.sendSync("getOS"));
 
         const minimize = document.getElementById("minimize");
         const maximize = document.getElementById("maximize");
@@ -65,14 +62,8 @@ function injectTitlebar(isOverlay?: boolean): void {
 }
 
 switch (ipcRenderer.sendSync("getConfig", "windowStyle")) {
-    case "default":
+    case "legacy":
         injectTitlebar(false);
-        break;
-    case "transparent":
-        injectTitlebar(false);
-        break;
-    case "overlay":
-        injectTitlebar(true);
         break;
     default:
         break;

@@ -17,6 +17,10 @@ contextBridge.exposeInMainWorld("legcord", {
         hide: () => ipcRenderer.send("win-hide"),
         minimize: () => ipcRenderer.send("win-minimize"),
         maximize: () => ipcRenderer.send("win-maximize"),
+        unmaximize: () => ipcRenderer.send("win-unmaximize"),
+        maximized: () => ipcRenderer.sendSync("win-isMaximized"),
+        isNormal: () => ipcRenderer.sendSync("win-isNormal"),
+        quit: () => ipcRenderer.send("win-quit"),
     },
     settings: {
         getConfig: () => ipcRenderer.sendSync("getEntireConfig") as Settings,

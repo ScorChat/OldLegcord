@@ -9,6 +9,10 @@ export interface LegcordWindow {
         hide: () => void;
         minimize: () => void;
         maximize: () => void;
+        unmaximize: () => void;
+        quit: () => void;
+        maximized: () => boolean;
+        isNormal: () => boolean;
     };
     electron: string;
     getLang: (toGet: string) => Promise<string>;

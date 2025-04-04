@@ -3,7 +3,7 @@ import { addStyle } from "../../common/dom.js";
 import { sleep } from "../../common/sleep.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (ipcRenderer.sendSync("getConfig", "windowStyle") !== "rebrand") return;
+    document.body.setAttribute("legcord-platform", ipcRenderer.sendSync("getOS"));
     sleep(500);
     switch (ipcRenderer.sendSync("getOS")) {
         case "darwin":

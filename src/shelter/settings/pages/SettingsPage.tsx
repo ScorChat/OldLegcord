@@ -62,12 +62,8 @@ export function SettingsPage() {
             >
                 <option value="default">{store.i18n["settings-theme-default"]}</option>
                 <option value="native">{store.i18n["settings-theme-native"]}</option>
-                <Show when={window.legcord.platform === "win32" || "darwin"}>
-                    <option value="overlay">{store.i18n["settings-theme-overlay"]}</option>
-                </Show>
-                <Show when={window.legcord.platform === "win32" || "darwin"}>
-                    <option value="rebrand">Rebrand</option>
-                </Show>
+                <option value="overlay">{store.i18n["settings-theme-overlay"]}</option>
+                <option value="legacy">Legacy</option>
             </DropdownItem>
             <DropdownItem
                 value={store.settings.transparency}

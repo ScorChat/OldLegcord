@@ -31,7 +31,7 @@ export interface Settings {
     // Only used for external url warning dialog.
     ignoreProtocolWarning?: boolean;
     customIcon: string;
-    windowStyle: "default" | "native" | "overlay" | "transparent" | "rebrand";
+    windowStyle: "default" | "native" | "overlay" | "transparent" | "legacy";
     channel: "stable" | "ptb" | "canary";
     transparency: "universal" | "modern" | "none";
     audio: AudioSettings;
