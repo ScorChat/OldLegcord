@@ -69,7 +69,6 @@ function layerPop() {
 }
 
 export function onLoad() {
-    if (window.legcord.platform !== "win32") return;
     log("Legcord Titlebar Controller");
     switch (settings.windowStyle) {
         case "default":
