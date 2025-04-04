@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.setAttribute("class", "platform-win");
             addStyle("legcord://assets/css/winTitlebar.css");
             break;
+        case "linux":
+            document.body.setAttribute("class", "platform-linux");
+            addStyle("legcord://assets/css/winTitlebar.css");
+            break;
         default:
             break;
     }
