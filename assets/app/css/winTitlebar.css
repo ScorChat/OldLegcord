@@ -1,3 +1,34 @@
 a[href="https://support.discord.com"] {
     margin-right: 150px;
 }
+
+.titlebar {
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    zoom: 1;
+    box-sizing: border-box;
+    width: 100%;
+    clear: both;
+    height: 36px;
+    line-height: 30px;
+    -webkit-app-region: drag !important;
+    user-select: none;
+    background-color: var(--background-base-lowest);
+    -webkit-user-select: none;
+    position: fixed;
+    z-index: 99999;
+}
+
+.window-title {
+    content: url("legcord://assets/Wordmark.png");
+    height: 15px;
+    margin-left: initial;
+    transform: translate(9px, 9px);
+    float: left;
+    padding: 0;
+    filter: invert(30%);
+}

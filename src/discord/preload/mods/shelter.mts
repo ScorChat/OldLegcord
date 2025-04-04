@@ -6,6 +6,7 @@ const requiredPlugins: Record<string, [string, { isVisible: boolean; allowedActi
     "legcord-settings": ["legcord://plugins/settings/", { isVisible: false, allowedActions: {} }],
     "legcord-power": ["legcord://plugins/power/", { isVisible: false, allowedActions: {} }],
     "legcord-screenshare": ["legcord://plugins/screenshare/", { isVisible: false, allowedActions: {} }],
+    "legcord-titlebar": ["legcord://plugins/titlebar/", { isVisible: false, allowedActions: {} }],
 };
 if (process.platform === "darwin") {
     requiredPlugins["legcord-touchbar"] = [

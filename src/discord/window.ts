@@ -232,9 +232,9 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
             passedWindow.setOverlayIcon(null, "");
         }
         if (process.platform === "darwin") {
-            if (title.startsWith("•")) return app.dock.setBadge("•");
+            if (title.startsWith("•")) return app.dock?.setBadge("•");
             if (title.startsWith("(")) {
-                if (getConfig("bounceOnPing")) app.dock.bounce();
+                if (getConfig("bounceOnPing")) app.dock?.bounce();
                 return app.setBadgeCount(Number.parseInt(/\((\d+)\)/.exec(title)![1]));
             }
             app.setBadgeCount(0);
@@ -366,19 +366,7 @@ export function createWindow() {
         case "overlay":
             browserWindowOptions.titleBarStyle = "hidden";
             browserWindowOptions.titleBarOverlay = {
-                color: "#2c2f33",
-                symbolColor: "#99aab5",
-                height: 30,
-            };
-            browserWindowOptions.trafficLightPosition = {
-                x: 10,
-                y: 10,
-            };
-            break;
-        case "rebrand":
-            browserWindowOptions.titleBarStyle = "hidden";
-            browserWindowOptions.titleBarOverlay = {
-                color: "#28282D",
+                color: getConfig("overlayButtonColor"),
                 symbolColor: "#99aab5",
                 height: 36,
             };

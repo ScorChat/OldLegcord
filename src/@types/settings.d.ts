@@ -65,5 +65,6 @@ export interface Settings {
     autoScroll: boolean;
     additionalArguments: string;
     noBundleUpdates: boolean;
+    overlayButtonColor: string;
     modCache?: Record<ValidMods, string>;
 }

@@ -10,6 +10,7 @@ const defaults: Settings = {
     bounceOnPing: false,
     legcordCSP: true,
     minimizeToTray: true,
+    overlayButtonColor: "#121214",
     keybinds: [],
     audio: {
         workaround: false,
