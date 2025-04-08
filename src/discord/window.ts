@@ -169,12 +169,18 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
 
     registerCustomHandler();
 
-    passedWindow.webContents.session.webRequest.onBeforeRequest(
-        {
-            urls: ["https://*/api/v*/science", "https://sentry.io/*", "https://*.nel.cloudflare.com/*"],
-        },
-        (_, callback) => callback({ cancel: true }),
-    );
+    const blockedPatterns = [
+        /https:\/\/.*\/api\/v\d+\/science/,
+        /https:\/\/sentry\.io\/.*/,
+        /https:\/\/.*\.nel\.cloudflare\.com\/.*/,
+    ];
+    passedWindow.webContents.session.webRequest.onBeforeRequest((details, callback) => {
+        if (details.url.startsWith("ws://") || blockedPatterns.some((pattern) => pattern.test(details.url))) {
+            return callback({ cancel: true });
+        }
+        return callback({});
+    });
+
     // fix UMG video playback
     passedWindow.webContents.session.webRequest.onBeforeSendHeaders(
         { urls: ["https://www.youtube.com/embed/*"] },
