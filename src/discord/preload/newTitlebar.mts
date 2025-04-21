@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (ipcRenderer.sendSync("getOS")) {
         case "darwin":
             document.body.setAttribute("class", "platform-osx");
+            addStyle("legcord://assets/css/winTitlebar.css");
             break;
         case "win32":
             document.body.setAttribute("class", "platform-win");
