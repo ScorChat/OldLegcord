@@ -134,6 +134,7 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     if (getConfig("additionalArguments") === undefined) setConfig("additionalArguments", "");
     if (getConfig("transparency") === undefined) setConfig("transparency", "none");
     if (getConfig("windowStyle") === "transparent") setConfig("windowStyle", "default");
+    if (getConfig("windowStyle") === "rebrand") setConfig("windowStyle", "default");
     if (typeof getConfig("tray") === "boolean") {
         //@ts-expect-error
         if (getConfig("tray") === true) {
