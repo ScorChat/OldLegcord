@@ -226,7 +226,6 @@ a[href="https://support.discord.com"] {
     transition: 0.1s ease;
 }
 
-
 /* Legcord on macOS */
 
 [legcord-platform="darwin"] .sidebar-1tnWFu {
@@ -349,4 +348,4 @@ a[href="https://support.discord.com"] {
 div[class*="bar__"][class*="hidden__"] {
     pointer-events: unset !important;
     visibility: unset !important;
-  }
+}
