@@ -345,3 +345,8 @@ a[href="https://support.discord.com"] {
 [legcord-platform="darwin"] #window-controls-container #spacer {
     display: none;
 }
+
+div[class*="bar__"][class*="hidden__"] {
+    pointer-events: unset !important;
+    visibility: unset !important;
+  }

@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sleep(500);
     switch (ipcRenderer.sendSync("getOS")) {
         case "darwin":
-            document.body.setAttribute("class", "platform-osx");
+            // breaks traffic lights with bar__ and hidden__ classes
+            // document.body.setAttribute("class", "platform-osx");
             addStyle("legcord://assets/css/winTitlebar.css");
             break;
         case "win32":
