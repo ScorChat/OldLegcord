@@ -17,7 +17,7 @@ const hook = async () => {
         // this fix is only required on linux
         return;
     }
-    const AppImageTarget = import("app-builder-lib/out/targets/AppImageTarget");
+    const AppImageTarget = import("app-builder-lib/out/targets/AppImageTarget.js");
     const oldBuildMethod = AppImageTarget.default.prototype.build;
     AppImageTarget.default.prototype.build = async function (...args) {
         console.log("Running AppImage builder hook", args);
