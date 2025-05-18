@@ -2,7 +2,7 @@ const { ipcRenderer, webFrame } = require("electron");
 import type { ModBundle } from "../../../@types/ModBundle.js";
 
 const requiredPlugins: Record<string, [string, { isVisible: boolean; allowedActions: Record<string, true> }]> = {
-    // "legcord-arrpc": "legcord://plugins/rpc/",
+    "legcord-arrpc": ["legcord://plugins/rpc/", { isVisible: false, allowedActions: {} }],
     "legcord-settings": ["legcord://plugins/settings/", { isVisible: false, allowedActions: {} }],
     "legcord-power": ["legcord://plugins/power/", { isVisible: false, allowedActions: {} }],
     "legcord-screenshare": ["legcord://plugins/screenshare/", { isVisible: false, allowedActions: {} }],

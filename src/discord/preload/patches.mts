@@ -59,7 +59,6 @@ async function load() {
         if (ipcRenderer.sendSync("getConfig", "disableAutogain")) {
             injectJS("legcord://assets/js/disableAutogain.js");
         }
-        injectJS("legcord://assets/js/rpc.js");
         addStyle("legcord://assets/css/discord.css");
     });
     // Settings info version injection
