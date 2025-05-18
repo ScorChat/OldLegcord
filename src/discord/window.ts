@@ -175,7 +175,7 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         /https:\/\/.*\.nel\.cloudflare\.com\/.*/,
     ];
     passedWindow.webContents.session.webRequest.onBeforeRequest((details, callback) => {
-        if (details.url.startsWith("ws://") || blockedPatterns.some((pattern) => pattern.test(details.url))) {
+        if (blockedPatterns.some((pattern) => pattern.test(details.url))) {
             return callback({ cancel: true });
         }
         return callback({});
