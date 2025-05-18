@@ -97,6 +97,7 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     crashReporter.start({ uploadToServer: false });
     // enable pulseaudio audio sharing on linux
     if (process.platform === "linux") {
+        app.commandLine.appendSwitch("gtk-version", "3");
         enableFeatures.add("PulseaudioLoopbackForScreenShare");
         disableFeatures.add("WebRtcAllowInputVolumeAdjustment");
         app.commandLine.appendSwitch("enable-speech-dispatcher");
