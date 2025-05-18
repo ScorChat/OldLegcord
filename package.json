@@ -18,7 +18,8 @@
         "lint": "biome check",
         "lint:fix": "biome check --write",
         "postinstall": "electron-builder install-app-deps",
-        "CIbuild": "pnpm run build && electron-builder --linux zip && electron-builder --windows zip && electron-builder --macos zip"
+        "CIbuild": "pnpm run build && electron-builder --linux zip && electron-builder --windows zip && electron-builder --macos zip",
+        "updateMeta": "tsx scripts/utils/updateMeta.mts"
     },
     "repository": {
         "type": "git",
@@ -56,7 +57,8 @@
         "solid-js": "^1.9.3",
         "solid-motionone": "^1.0.3",
         "tsx": "^4.19.2",
-        "typescript": "^5.7.2"
+        "typescript": "^5.7.2",
+        "xml-formatter": "^3.6.6"
     },
     "dependencies": {
         "arrpc": "https://github.com/Legcord/arrpc.git#3275152dfe7d3d4f7ae41cbca01257deba15a446",
@@ -68,6 +70,6 @@
     "optionalDependencies": {
         "@vencord/venmic": "^6.1.0"
     },
-    "packageManager": "pnpm@10.0.0-beta.1+sha512.629de0531b9ae9a3f8e372d014ef8f5a57906d9a48095ced54bbfbd246b4136381478032c8d13819fd1eedde8330517a799ea6756eedd9a136e36524fa3083cf",
+    "packageManager": "pnpm@10.11.0",
     "package-manager-strict": false
 }
