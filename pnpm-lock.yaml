@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       arrpc:
-        specifier: https://github.com/Legcord/arrpc.git
+        specifier: https://github.com/Legcord/arrpc.git#3275152dfe7d3d4f7ae41cbca01257deba15a446
         version: https://codeload.github.com/Legcord/arrpc/tar.gz/3275152dfe7d3d4f7ae41cbca01257deba15a446
       electron-context-menu:
         specifier: ^4.0.4
