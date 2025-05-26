@@ -14,5 +14,16 @@ window.localStorage.setItem("hideNag", "true");
 declare global {
     interface Window {
         legcord: LegcordWindow;
+        LegcordRPC: {
+            listen: (
+                callback: (msg: {
+                    activity: {
+                        assets: { large_image: string | null; small_image: string | null };
+                        application_id: number;
+                        name: string;
+                    };
+                }) => void,
+            ) => void;
+        };
     }
 }
