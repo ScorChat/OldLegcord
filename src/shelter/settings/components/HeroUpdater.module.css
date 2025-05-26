@@ -1,0 +1,13 @@
+.hero {
+    background: var(--background-surface-high);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-elevation-2);
+    color: var(--text-on-surface);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}

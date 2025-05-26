@@ -1,7 +1,9 @@
 /// <reference path="../../../node_modules/@uwu/shelter-defs/dist/shelter-defs/rootdefs.d.ts" />
 import { KeybindsPage } from "./pages/KeybindsPage.jsx";
+import { RegisteredGamesPage } from "./pages/RegisteredGamesPage.jsx";
 import { SettingsPage } from "./pages/SettingsPage.jsx";
 import { ThemesPage } from "./pages/ThemesPage.jsx";
+
 import { isRestartRequired, refreshSettings, refreshThemes } from "./settings.js";
 const {
     plugin: { store },
@@ -12,6 +14,7 @@ const {
 } = shelter;
 
 const settingsPages = [
+    registerSection("section", "legcord-games", "Registered Games", RegisteredGamesPage),
     registerSection("divider"),
     registerSection("header", "Legcord"),
     registerSection("section", "legcord-settings", "Settings", SettingsPage),

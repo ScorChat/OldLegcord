@@ -1,13 +1,14 @@
 import { Show } from "solid-js";
 import type { Settings } from "../../../@types/settings.js";
 import { DropdownItem } from "../components/DropdownItem.jsx";
+import HeroUpdater from "../components/HeroUpdater.jsx";
 import { TextBoxItem } from "../components/TextBoxItem.jsx";
 import { setConfig, toggleMod } from "../settings.js";
 import classes from "./SettingsPage.module.css";
 
 const {
     plugin: { store },
-    ui: { SwitchItem, Header, Divider, HeaderTags, Button, ButtonSizes },
+    ui: { SwitchItem, Header, HeaderTags, Button, ButtonSizes },
 } = shelter;
 
 const settings = store.settings as Settings;
@@ -15,8 +16,7 @@ const settings = store.settings as Settings;
 export function SettingsPage() {
     return (
         <>
-            <Header tag={HeaderTags.H1}>Settings</Header>
-            <Divider mt mb />
+            <HeroUpdater />
             <Header class={classes.category} tag={HeaderTags.H5}>
                 {store.i18n["settings-category-mods"]}
             </Header>
