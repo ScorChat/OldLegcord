@@ -26,6 +26,32 @@ const performance: Preset = {
     disableFeatures: ["Vulkan"],
 };
 
+const smoothExperiment: Preset = {
+    switches: [
+        ["enable-gpu-rasterization"],
+        ["enable-zero-copy"],
+        ["ignore-gpu-blocklist"],
+        ["disable-background-timer-throttling"],
+        ["disable-renderer-backgrounding"],
+        ["enable-hardware-overlays", "single-fullscreen,single-on-top,underlay"],
+        ["force_high_performance_gpu"],
+        ["use-gl", "desktop"],
+    ],
+    enableFeatures: [
+        "EnableDrDc",
+        "CanvasOopRasterization",
+        "BackForwardCache:TimeToLiveInBackForwardCacheInSeconds/300/should_ignore_blocklists/true/enable_same_site/true",
+        "ThrottleDisplayNoneAndVisibilityHiddenCrossOriginIframes",
+        "UseSkiaRenderer",
+        "WebAssemblyLazyCompilation",
+        "AcceleratedVideoDecodeLinuxGL",
+        "AcceleratedVideoEncoder",
+        "AcceleratedVideoDecoder",
+        "AcceleratedVideoDecodeLinuxZeroCopyGL",
+    ],
+    disableFeatures: ["Vulkan", "UseChromeOSDirectVideoDecoder"],
+};
+
 const battery: Preset = {
     // Known to have better battery life for Chromium?
     switches: [
@@ -95,6 +121,9 @@ export function getPreset(): Preset | undefined {
         case "vaapi":
             console.log("VAAPI mode enabled");
             return vaapi;
+        case "smoothScreenshare":
+            console.log("Smooth screenshare mode enabled");
+            return smoothExperiment;
         default:
             console.log("No performance modes set");
     }

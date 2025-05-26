@@ -42,7 +42,7 @@ export interface Settings {
     mods: ValidMods[];
     mobileMode: boolean;
     skipSplash: boolean;
-    performanceMode: "battery" | "dynamic" | "performance" | "vaapi" | "none";
+    performanceMode: "battery" | "dynamic" | "performance" | "vaapi" | "smoothScreenshare" | "none";
     customJsBundle: RequestInfo | URL | string;
     customCssBundle: RequestInfo | URL | string;
     startMinimized: boolean;
