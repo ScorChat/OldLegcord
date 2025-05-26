@@ -1,0 +1,39 @@
+import { fetchApp, fetchAssetId, fetchExternalAsset } from "./asset.js";
+
+const {
+    flux: { dispatcher: FluxDispatcher },
+} = shelter;
+
+export function onLoad() {
+    window.LegcordRPC.listen(
+        async (msg: {
+            activity: {
+                assets: { large_image: string | null; small_image: string | null };
+                application_id: number;
+                name: string;
+            };
+        }) => {
+            if (msg.activity?.assets?.large_image?.startsWith("https://")) {
+                console.log(fetchExternalAsset(msg.activity.application_id, msg.activity.assets.large_image));
+            } else {
+                if (msg.activity?.assets?.large_image)
+                    msg.activity.assets.large_image = await fetchAssetId(
+                        msg.activity.application_id,
+                        msg.activity.assets.large_image,
+                    );
+                if (msg.activity?.assets?.small_image)
+                    msg.activity.assets.small_image = await fetchAssetId(
+                        msg.activity.application_id,
+                        msg.activity.assets.small_image,
+                    );
+            }
+            if (msg.activity) {
+                const appId = msg.activity.application_id;
+                const app = await fetchApp(appId);
+                if (!msg.activity.name) msg.activity.name = app.name;
+                console.log("RPC activity update", msg.activity);
+            }
+            FluxDispatcher.dispatch({ type: "LOCAL_ACTIVITY_UPDATE", ...msg }); // set RPC status
+        },
+    );
+}
