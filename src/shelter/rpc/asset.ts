@@ -4,7 +4,7 @@ const cache = new Map<string, string | undefined>();
 type Asset = { id: string; name: string; [key: string]: unknown };
 const assetCache: { [key: number]: Asset[] } = {};
 const appCache: { [key: number]: { id: number; name: string } } = {};
-export async function fetchExternalAsset(applicationId: number, url: string) {
+export async function fetchExternalAsset(applicationId: number, url: string): Promise<string | undefined> {
     await http.ready;
     if (cache.has(url)) {
         return cache.get(url);
@@ -21,6 +21,7 @@ export async function fetchExternalAsset(applicationId: number, url: string) {
         return path;
     }
     cache.set(url, undefined);
+    return "";
 }
 
 export async function fetchAssetId(applicationId: number, assetName: string): Promise<string | null> {

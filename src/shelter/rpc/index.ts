@@ -8,13 +8,27 @@ export function onLoad() {
     window.LegcordRPC.listen(
         async (msg: {
             activity: {
-                assets: { large_image: string | null; small_image: string | null };
+                assets: { large_image: string | null | undefined; small_image: string | null | undefined };
                 application_id: number;
                 name: string;
             };
         }) => {
-            if (msg.activity?.assets?.large_image?.startsWith("https://")) {
-                console.log(fetchExternalAsset(msg.activity.application_id, msg.activity.assets.large_image));
+            if (
+                msg.activity?.assets?.large_image?.startsWith("https://") ??
+                msg.activity?.assets?.small_image?.startsWith("https://")
+            ) {
+                if (typeof msg.activity.assets.large_image === "string") {
+                    msg.activity.assets.large_image = await fetchExternalAsset(
+                        msg.activity.application_id,
+                        msg.activity.assets.large_image,
+                    );
+                }
+                if (typeof msg.activity.assets.small_image === "string") {
+                    msg.activity.assets.small_image = await fetchExternalAsset(
+                        msg.activity.application_id,
+                        msg.activity.assets.small_image,
+                    );
+                }
             } else {
                 if (msg.activity?.assets?.large_image)
                     msg.activity.assets.large_image = await fetchAssetId(
