@@ -297,7 +297,7 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
     });
     if (getConfig("inviteWebsocket") && mainWindows.length === 1) {
         const child = utilityProcess.fork(path.join(import.meta.dirname, "rpc.js"), undefined, {
-            env: { detectables: getDetectables().toString() },
+            env: { detectables: JSON.stringify(getDetectables()) },
         });
 
         child.on("spawn", () => {
