@@ -4,5 +4,3 @@ onlyBuiltDependencies:
   - '@vencord/venmic'
   - electron
   - esbuild
-overrides:
-  arrpc: link:../arrpc
