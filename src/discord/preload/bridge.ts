@@ -4,6 +4,7 @@ import type { LegcordWindow } from "../../@types/legcordWindow.d.ts";
 import type { Settings } from "../../@types/settings.js";
 import type { ThemeManifest } from "../../@types/themeManifest.js";
 import type { venmicListObject } from "../venmic.js";
+let windowCallback: (arg0: object) => void;
 
 interface IPCSources {
     id: string;
@@ -88,14 +89,15 @@ contextBridge.exposeInMainWorld("legcord", {
         folder: (id: string) => ipcRenderer.send("openThemeFolder", id),
         openQuickCss: () => ipcRenderer.send("openQuickCss"),
     },
+    rpc: {
+        listen: (callback: () => void) => {
+            windowCallback = callback;
+        },
+        refreshProcessList: () => ipcRenderer.send("refreshProcessList"),
+        getProcessList: () => ipcRenderer.sendSync("getProcessList"),
+    },
 } as unknown as LegcordWindow);
 
-let windowCallback: (arg0: object) => void;
-contextBridge.exposeInMainWorld("LegcordRPC", {
-    listen: (callback: () => void) => {
-        windowCallback = callback;
-    },
-});
 ipcRenderer.on("rpc", (_event, data: object) => {
     console.log(data);
     windowCallback(data);

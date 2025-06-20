@@ -2,7 +2,10 @@ const { ipcRenderer } = require("electron");
 import { addStyle } from "../../common/dom.js";
 import { sleep } from "../../common/sleep.js";
 
-if (ipcRenderer.sendSync("getConfig", "windowStyle") !== "default") {
+if (
+    ipcRenderer.sendSync("getConfig", "windowStyle") === "default" ||
+    ipcRenderer.sendSync("getConfig", "windowStyle") === "overlay"
+) {
     document.addEventListener("DOMContentLoaded", () => {
         document.body.setAttribute("legcord-platform", ipcRenderer.sendSync("getOS"));
         addStyle("legcord://assets/css/baseTitlebar.css");

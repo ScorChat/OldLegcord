@@ -9,11 +9,9 @@ import {
     dialog,
     nativeImage,
     shell,
-    utilityProcess,
 } from "electron";
 import contextMenu from "electron-context-menu";
 import { firstRun, getConfig, setConfig } from "../common/config.js";
-import { getDetectables } from "../common/detectables.js";
 import { forceQuit, setForceQuit } from "../common/forceQuit.js";
 import { initQuickCss, injectThemesMain } from "../common/themes.js";
 import { getWindowState, setWindowState } from "../common/windowState.js";
@@ -21,6 +19,7 @@ import { init } from "../main.js";
 import { registerGlobalKeybinds } from "./globalKeybinds.js";
 import { registerIpc } from "./ipc.js";
 import { setMenu } from "./menu.js";
+import { startRPC } from "./rpcProcess.js";
 import { registerCustomHandler } from "./screenshare.js";
 import { mainTouchBar } from "./touchbar.js";
 import { createTray, tray } from "./tray.js";
@@ -296,30 +295,7 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
         void passedWindow.webContents.executeJavaScript(`document.body.removeAttribute("isMaximized");`);
     });
     if (getConfig("inviteWebsocket") && mainWindows.length === 1) {
-        const child = utilityProcess.fork(path.join(import.meta.dirname, "rpc.js"), undefined, {
-            env: { detectables: JSON.stringify(getDetectables()) },
-        });
-
-        child.on("spawn", () => {
-            console.log("arRPC process started");
-            console.log(child.pid);
-        });
-
-        child.on("message", (message) => {
-            const json = JSON.parse(message);
-            if (json.type === "invite") {
-                createInviteWindow(json.code);
-            } else if (json.type === "activity") {
-                console.log("activity pulse");
-                console.log(json.data);
-                passedWindow.webContents.send("rpc", json.data);
-            }
-        });
-
-        child.on("exit", () => {
-            console.log("arRPC process exited");
-            console.log(child.pid);
-        });
+        startRPC(passedWindow);
     }
     if (firstRun) {
         passedWindow.close();

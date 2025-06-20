@@ -61,7 +61,7 @@
         "xml-formatter": "^3.6.6"
     },
     "dependencies": {
-        "arrpc": "https://github.com/Legcord/arrpc.git#2b89dd0a7d01b26dcb1daa4d47ce21cefbf340a3",
+        "arrpc": "https://github.com/Legcord/arrpc.git#9abda032465847724d29db9aeeacc0b375c55a86",
         "electron-context-menu": "^4.0.4",
         "electron-is-dev": "^3.0.1",
         "electron-updater": "^6.6.2",

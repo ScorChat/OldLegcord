@@ -62,4 +62,17 @@ export interface LegcordWindow {
         edit: (id: string) => void;
         folder: (id: string) => void;
     };
+    rpc: {
+        listen: (
+            callback: (msg: {
+                activity: {
+                    assets: { large_image: string | null; small_image: string | null };
+                    application_id: number;
+                    name: string;
+                };
+            }) => void,
+        ) => void;
+        getProcessList: () => void;
+        refreshProcessList: () => void;
+    };
 }

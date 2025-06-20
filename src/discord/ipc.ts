@@ -15,6 +15,7 @@ import { isPowerSavingEnabled, setPowerSaving } from "../power.js";
 import constPaths from "../shared/consts/paths.js";
 import { splashWindow } from "../splash/main.js";
 import { refreshGlobalKeybinds } from "./globalKeybinds.js";
+import { processList, refreshProcessList } from "./rpcProcess.js";
 import { importGuilds, mainTouchBar, setVoiceState, voiceTouchBar } from "./touchbar.js";
 
 const userDataPath = app.getPath("userData");
@@ -288,5 +289,11 @@ export function registerIpc(passedWindow: BrowserWindow): void {
     });
     ipcMain.on("getConstPaths", (event) => {
         event.returnValue = constPaths;
+    });
+    ipcMain.on("getProcessList", (event) => {
+        event.returnValue = processList;
+    });
+    ipcMain.on("refreshProcessList", () => {
+        refreshProcessList();
     });
 }

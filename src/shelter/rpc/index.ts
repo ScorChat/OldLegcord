@@ -5,7 +5,7 @@ const {
 } = shelter;
 
 export function onLoad() {
-    window.LegcordRPC.listen(
+    window.legcord.rpc.listen(
         async (msg: {
             activity: {
                 assets: { large_image: string | null | undefined; small_image: string | null | undefined };

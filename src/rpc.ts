@@ -16,3 +16,12 @@ RPC.on("invite", (code: string) => {
     const response = { type: "invite", code: code };
     process.parentPort.postMessage(JSON.stringify(response));
 });
+
+process.parentPort.once("message", async (e) => {
+    if (e.data.message === "refreshProcessList") {
+        const processes = await RPC.getProcessesList();
+        console.log(processes);
+        const response = { type: "processList", data: processes };
+        process.parentPort.postMessage(JSON.stringify(response));
+    }
+});
