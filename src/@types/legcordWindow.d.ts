@@ -1,4 +1,5 @@
 import type { Node } from "@vencord/venmic";
+import type { Game, GameList, ProcessInfo } from "arrpc";
 import type { Keybind } from "./keybind.js";
 import type { Settings } from "./settings.js";
 import type { ThemeManifest } from "./themeManifest.js";
@@ -72,7 +73,9 @@ export interface LegcordWindow {
                 };
             }) => void,
         ) => void;
-        getProcessList: () => void;
+        getProcessList: () => ProcessInfo[];
         refreshProcessList: () => void;
+        addDetectable: (e: Game) => void;
+        getDetectables: () => GameList;
     };
 }

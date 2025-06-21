@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
+import type { Game } from "arrpc";
 import type { Keybind } from "../../@types/keybind.js";
 import type { LegcordWindow } from "../../@types/legcordWindow.d.ts";
 import type { Settings } from "../../@types/settings.js";
@@ -95,6 +96,8 @@ contextBridge.exposeInMainWorld("legcord", {
         },
         refreshProcessList: () => ipcRenderer.send("refreshProcessList"),
         getProcessList: () => ipcRenderer.sendSync("getProcessList"),
+        addDetectable: (detectable: Game) => ipcRenderer.send("addDetectable", detectable),
+        getDetectables: () => ipcRenderer.sendSync("getDetectables") as Game[],
     },
 } as unknown as LegcordWindow);
 

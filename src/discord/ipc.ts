@@ -1,12 +1,14 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import type { Game } from "arrpc";
 import { type BrowserWindow, app, clipboard, dialog, ipcMain, shell } from "electron";
 import isDev from "electron-is-dev";
 import type { Keybind } from "../@types/keybind.js";
 import type { Settings } from "../@types/settings.js";
 import type { ThemeManifest } from "../@types/themeManifest.js";
 import { getConfig, getConfigLocation, setConfig, setConfigBulk } from "../common/config.js";
+import { addDetectable, getDetectables } from "../common/detectables.js";
 import { getLang, getLangName, getRawLang, setLang } from "../common/lang.js";
 import { installTheme, setThemeEnabled, uninstallTheme } from "../common/themes.js";
 import { getDisplayVersion, getVersion } from "../common/version.js";
@@ -293,7 +295,15 @@ export function registerIpc(passedWindow: BrowserWindow): void {
     ipcMain.on("getProcessList", (event) => {
         event.returnValue = processList;
     });
+
+    // custom detectables control
     ipcMain.on("refreshProcessList", () => {
         refreshProcessList();
+    });
+    ipcMain.on("getDetectables", (event) => {
+        event.returnValue = getDetectables();
+    });
+    ipcMain.on("addDetectable", (_event, game: Game) => {
+        addDetectable(game);
     });
 }
