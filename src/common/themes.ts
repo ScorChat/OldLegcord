@@ -83,6 +83,7 @@ function parseBDManifest(content: string) {
     return manifest;
 }
 export function injectThemesMain(browserWindow: BrowserWindow): void {
+    if (process.argv.includes("--safe-mode")) return;
     if (!fs.existsSync(themesFolder)) {
         fs.mkdirSync(themesFolder);
         console.log("Created missing theme folder");
@@ -183,6 +184,7 @@ export async function installTheme(linkOrPath: string) {
 }
 
 export function initQuickCss(browserWindow: BrowserWindow) {
+    if (process.argv.includes("--safe-mode")) return;
     const quickCssPath = path.join(userDataPath, "/quickCss.css");
     browserWindow.webContents.on("did-finish-load", () => {
         if (!fs.existsSync(quickCssPath)) {

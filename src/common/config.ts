@@ -52,6 +52,15 @@ const defaults: Settings = {
     autoScroll: false,
     useSystemCssEditor: false,
 };
+
+const safeMode: Settings = {
+    ...defaults,
+    mods: [],
+    windowStyle: "native",
+    hardwareAcceleration: false,
+    disableHttpCache: true,
+};
+
 export function checkForDataFolder(): void {
     const dataPath = join(dirname(app.getPath("exe")), "legcord-data");
     if (existsSync(dataPath) && statSync(dataPath).isDirectory()) {
@@ -67,6 +76,9 @@ export function getConfigLocation(): string {
 }
 
 export function getConfig<K extends keyof Settings>(object: K): Settings[K] {
+    if (process.argv.includes("--safe-mode")) {
+        return safeMode[object];
+    }
     const rawData = readFileSync(getConfigLocation(), "utf-8");
     const returnData = JSON.parse(rawData) as Settings;
     return returnData[object];
