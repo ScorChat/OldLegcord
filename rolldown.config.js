@@ -102,8 +102,8 @@ export default defineConfig([
         external: electronExternals,
         plugins: [
             babel({
-                presets: ["solid", "@babel/preset-flow"],
-                babelHelpers: "bundled",
+                presets: ["solid", "@babel/preset-flow", "@babel/preset-typescript"],
+                babelHelpers: "inline",
                 exclude: "node_modules/**",
                 extensions: [".ts", ".tsx"],
             }),
