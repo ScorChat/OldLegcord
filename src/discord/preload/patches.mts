@@ -61,6 +61,7 @@ async function load() {
         }
         addStyle("legcord://assets/css/discord.css");
     });
+    injectJS("legcord://assets/js/patchVencordQuickCSS.js");
     // Settings info version injection
     setInterval(() => {
         const host = document.querySelector('[class*="sidebar"] [class*="info"]');
