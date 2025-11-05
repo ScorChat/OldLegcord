@@ -1,14 +1,7 @@
 import { createSignal } from "solid-js";
 import classes from "./HeroUpdater.module.css";
 const {
-    ui: {
-        Button,
-        ButtonSizes,
-        Header,
-        HeaderTags,
-        Text,
-        ButtonColors,
-    },
+    ui: { Button, ButtonSizes, Header, HeaderTags, Text, ButtonColors },
 } = shelter;
 const LOGO_URL = "https://github.com/Legcord/Branding/raw/main/assets/legcord-banner.png";
 
@@ -51,18 +44,16 @@ export const HeroUpdater = () => {
                     Check for Updates
                 </Button>
             )}
-            
+
             {updateAvailable() === true && (
-                <>  
+                <>
                     <Text>Update available!</Text>
                     <Button size={ButtonSizes.XLARGE} color={ButtonColors.RED} onClick={handleDownload}>
                         Open Download Page
                     </Button>
                 </>
             )}
-            {updateAvailable() === false && (
-                <Text>Your app is up to date.</Text>
-            )}
+            {updateAvailable() === false && <Text>Your app is up to date.</Text>}
         </div>
     );
 };
