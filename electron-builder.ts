@@ -16,7 +16,7 @@ export const config: Configuration = {
             "com.apple.security.device.audio-input": true,
             "com.apple.security.device.camera": true,
         },
-        x64ArchFiles: "{**darwin_x64/koffi.node}",
+        x64ArchFiles: "{Contents/Resources/app.asar.unpacked/node_modules/koffi/build/koffi/darwin_x64/koffi.node}",
     },
 
     linux: {
