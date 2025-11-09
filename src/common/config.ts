@@ -24,7 +24,7 @@ const defaults: Settings = {
         loopbackType: "loopback",
     },
     multiInstance: false,
-    mods: ["vencord"],
+    mods: [],
     transparency: "none",
     spellcheck: true,
     hardwareAcceleration: true,

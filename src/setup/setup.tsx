@@ -234,17 +234,7 @@ const ModSelector = ({ readyToNext }: { readyToNext: (valid: boolean) => void })
     };
     const mods = [
         {
-            id: "vencord",
-            title: "Vencord",
-            description: "Client mod with plugins and themes.",
-            icon: "legcord://assets/vencord.png",
-        },
-        {
-            id: "equicord",
-            title: "Equicord",
-            description: "A fork of Vencord with more plugins.",
-            icon: "legcord://assets/equicord.png",
-        },
+        }
     ];
 
     return (

@@ -303,17 +303,17 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
 
     registerGlobalKeybinds();
     switch (getConfig("channel")) {
-        case "stable":
-            void passedWindow.loadURL("https://discord.com/app");
+        case "official":
+            void passedWindow.loadURL("https://staging.oldcordapp.com");
             break;
-        case "canary":
-            void passedWindow.loadURL("https://canary.discord.com/app");
+        case "firecord":
+            void passedWindow.loadURL("https://firecord.cyberward.xyz/");
             break;
-        case "ptb":
-            void passedWindow.loadURL("https://ptb.discord.com/app");
+        case "local":
+            void passedWindow.loadURL("http://localhost:1337");
             break;
         default:
-            void passedWindow.loadURL("https://discord.com/app");
+            void passedWindow.loadURL("https://staging.oldcordapp.com");
             break;
     }
 

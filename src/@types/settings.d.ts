@@ -1,6 +1,6 @@
 import type { Keybind } from "./keybind.js";
 
-export type ValidMods = "vencord" | "equicord" | "custom" | "shelter";
+export type ValidMods = "custom" | "shelter";
 
 export type ValidTrayIcons =
     | "dynamic"
@@ -32,7 +32,7 @@ export interface Settings {
     ignoreProtocolWarning?: boolean;
     customIcon: string;
     windowStyle: "default" | "native" | "overlay" | "transparent" | "legacy" | "rebrand";
-    channel: "stable" | "ptb" | "canary";
+    channel: "official" | "firecord" | "local";
     transparency: "universal" | "modern" | "none";
     audio: AudioSettings;
     legcordCSP: boolean;

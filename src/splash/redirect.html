@@ -4,17 +4,17 @@
         <title>Loading</title>
     </head>
     <body>
-        <h1>Loading Discord</h1>
+        <h1>Loading Oldcord</h1>
         <script>
             switch (window.legcord.channel) {
-                case "canary":
-                    window.location.replace("https://canary.discord.com/app");
+                case "firecord":
+                    window.location.replace("https://firecord.cyberward.xyz");
                     break;
-                case "ptb":
-                    window.location.replace("https://ptb.discord.com/app");
+                case "local":
+                    window.location.replace("http://localhost:1337");
                     break;
                 default:
-                    window.location.replace("https://discord.com/app");
+                    window.location.replace("https://staging.oldcordapp.com");
             }
         </script>
     </body>
