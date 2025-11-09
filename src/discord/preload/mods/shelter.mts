@@ -20,7 +20,7 @@ async function inject() {
             if (bundle.enabled) {
                 await webFrame.executeJavaScript(`(()=>{
                 const SHELTER_INJECTOR_PLUGINS = ${JSON.stringify(requiredPlugins)};
-                ${bundle.js}
+                ${bundle.js.replace(/\w+\(\s*["']_dispatchToken["']\s*,\s*[^,]+,\s*\w+\s*=>.*?Array\.isArray\(.*?\)\s*\?.*?\s*\.push\(.*?\);/, "")}
             })()`);
             }
         });
